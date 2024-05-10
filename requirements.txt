@@ -1,0 +1,6 @@
+robotframework
+robotframework-requests
+robotframework-jsonlibrary
+robotframework-faker
+psycopg[binary]
+psycopg[pool]

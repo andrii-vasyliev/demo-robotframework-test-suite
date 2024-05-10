@@ -1,0 +1,17 @@
+testrun/
+output/
+temp/
+.venv/
+__pycache__/
+.rpa/
+log/
+*.py[cod]
+*$py.class
+*.log
+*.tmp
+*.bak
+*.zip
+*.libspec
+*.libspec.m
+.DS_Store
+Thumbs.db

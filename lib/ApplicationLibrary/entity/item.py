@@ -1,0 +1,21 @@
+"""Item entity definition"""
+
+from ApplicationLibrary.utils.audited import Audited
+
+
+class Item(Audited):
+    """Item entity"""
+
+    def __init__(
+        self,
+        id: str | None = None,
+        name: str | None = None,
+        price: float | None = None,
+    ):
+        super().__init__()
+        self.id: str | None = id
+        self.name: str | None = name
+        self.price: float | None = price
+
+    def __repr__(self):
+        return f"Item(id={self.id}, name={self.name}, price={self.price})"
