@@ -1,14 +1,14 @@
 from datetime import datetime
 from robot.api.deco import keyword
 from .utils.exec_context import ExecContext, get_exec_context
-from .global_context import gc
+from .context_keywords import gc
 from .entity.item import Item
 from .entity.order_item import OrderItem
 from .entity.order import Order
 
 
 class OrdersKeywords:
-    """Application custom keywords"""
+    """Orders related custom keywords"""
 
     @staticmethod
     @keyword

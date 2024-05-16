@@ -4,6 +4,8 @@ from .entity.customer import Customer
 
 
 class CustomersKeywords:
+    """Customers related custom keywords"""
+
     @staticmethod
     @keyword
     def define_customer(
