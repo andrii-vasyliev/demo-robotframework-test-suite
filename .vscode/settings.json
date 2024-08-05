@@ -8,8 +8,6 @@
     "robot.libraries.libdoc.preGenerate": [
         "${workspaceFolder}/lib/ApplicationLibrary",
         "${workspaceFolder}/lib/PostgreSQLLibrary",
-        "${workspaceFolder}/lib/suite_context.py",
-        "${workspaceFolder}/lib/test_context.py",
     ],
     "robot.codeFormatter": "robotidy",
     "robot.completions.keywords.prefixImportName": false,

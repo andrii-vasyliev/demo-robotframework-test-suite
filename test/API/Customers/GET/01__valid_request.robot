@@ -23,7 +23,6 @@ Get single customer by name
     ${SUITE_CONTEXT.customers[0].name}    any    ${SUITE_CONTEXT.customers[0]}
     # Customer with email
     ${SUITE_CONTEXT.customers[4].name}    ${None}    ${SUITE_CONTEXT.customers[4]}
-    # ${c5.name}    ${EMPTY}    ${SUITE_CONTEXT.customers[4]}
     ${SUITE_CONTEXT.customers[4].name}    any    ${SUITE_CONTEXT.customers[4]}
 
 Get multiple customers by name
