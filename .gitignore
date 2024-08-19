@@ -15,3 +15,4 @@ log/
 *.libspec.m
 .DS_Store
 Thumbs.db
+.pabotsuitenames

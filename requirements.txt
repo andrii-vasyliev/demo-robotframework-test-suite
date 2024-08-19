@@ -2,5 +2,6 @@ robotframework
 robotframework-requests
 robotframework-jsonlibrary
 robotframework-faker
+robotframework-pabot
 psycopg[binary]
 psycopg[pool]
