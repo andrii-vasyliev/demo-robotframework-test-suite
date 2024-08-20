@@ -96,3 +96,5 @@ Project consists of following folders:
     `pabot --processes 5 --name "Demo Test Suite" --pythonpath lib --variable ENV_NAME:local --outputdir log --include customers_api test`
 
     or use Microsoft Visual Studio Code to run individual test cases or suites from Editor or Testing view
+
+4. Check test execution results `log/log.html`and/or `log/report.html`
