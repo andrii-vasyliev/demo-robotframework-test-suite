@@ -13,6 +13,7 @@ Validate Customers
         Append To List    ${expected}    ${customer.row}
         Append To List    ${customer_ids}    ${customer.id}
     END
+    ${expected}    Evaluate    sorted([customer_row for customer_row in $expected], key=lambda x: x[0])
     ${result}    PG Get Customers By Ids    @{customer_ids}
     Lists Should Be Equal    ${expected}    ${result}    Customers are not as expected
 

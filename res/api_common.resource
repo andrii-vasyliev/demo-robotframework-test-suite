@@ -61,9 +61,9 @@ Validate API Error Response
     ...    - ``response``    response to be validated
     ...    - ``status_code``    expected response status code
     ...
-    [Arguments]    ${response}    ${expected_status}
+    [Arguments]    ${response}    ${status_code}
     Validate API Response Template
     ...    ${response}
     ...    ${JSD_API_ERROR}
     ...    application/json
-    ...    ${expected_status}
+    ...    ${status_code}

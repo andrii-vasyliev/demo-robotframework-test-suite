@@ -1,6 +1,6 @@
 from robot.api.deco import keyword
 from .utils.audited import AuditInfo
-from .exec_context import ExecContext, get_exec_context
+from .exec_context import ExecContextType, ExecContext, get_exec_context
 from .entity.customer import Customer
 
 
@@ -10,7 +10,10 @@ class CustomersKeywords:
     @staticmethod
     @keyword
     def define_customer(
-        customer_id: str, name: str, email: str | None, scope: str = "TEST"
+        customer_id: str,
+        name: str,
+        email: str | None,
+        scope: str = ExecContextType.TEST,
     ) -> Customer:
         """Creates customer entity"""
         customer: Customer = Customer(customer_id, name, email)

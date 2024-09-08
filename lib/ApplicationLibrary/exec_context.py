@@ -9,8 +9,8 @@ from .utils.audited import AuditInfo
 class ExecContextType(StrEnum):
     """Enum for the exec context type"""
 
-    TEST = auto()
-    SUITE = auto()
+    TEST = "TEST"
+    SUITE = "SUITE"
 
 
 class GlobalContext:
@@ -80,12 +80,12 @@ def get_global_context() -> GlobalContext | None:
     return BuiltIn().get_variable_value(r"${GLOBAL_CONTEXT}", None)
 
 
-def get_exec_context(scope: str = "TEST") -> ExecContext | None:
+def get_exec_context(scope: str = ExecContextType.TEST) -> ExecContext | None:
     """
     Returns an ExecContext object in the given scope.
-    Defaults to the TEST scope.
-    Available scopes: TEST, SUITE
+    Defaults to the "TEST" scope.
+    Available scopes: "TEST", "SUITE"
     """
     return BuiltIn().get_variable_value(
-        "${" + ExecContextType[scope] + "_CONTEXT}", None
+        "${" + ExecContextType[scope.upper()] + "_CONTEXT}", None
     )
