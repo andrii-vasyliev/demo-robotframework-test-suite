@@ -1,8 +1,5 @@
 from robot.api.deco import keyword
-from .utils.exec_context import GlobalContext, ExecContext
-
-
-gc: GlobalContext | None = None
+from .exec_context import GlobalContext, ExecContext
 
 
 class ContextKeywords:
@@ -12,16 +9,13 @@ class ContextKeywords:
     @keyword
     def define_global_context(items: list[dict]) -> GlobalContext:
         """Creates global context object"""
-        global gc
-        gc = GlobalContext(items)
-        return gc
+        return GlobalContext(items)
 
     @staticmethod
     @keyword
     def dispose_global_context() -> None:
         """Disposes global context object"""
-        global gc
-        gc = None
+        pass
 
     @staticmethod
     @keyword

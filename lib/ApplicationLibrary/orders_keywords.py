@@ -1,7 +1,12 @@
 from datetime import datetime
 from robot.api.deco import keyword
-from .utils.exec_context import ExecContext, get_exec_context
-from .context_keywords import gc
+from .utils.audited import AuditInfo
+from .exec_context import (
+    GlobalContext,
+    ExecContext,
+    get_global_context,
+    get_exec_context,
+)
 from .entity.item import Item
 from .entity.order_item import OrderItem
 from .entity.order import Order
@@ -14,6 +19,8 @@ class OrdersKeywords:
     @keyword
     def define_order(items: list[dict], scope: str = "TEST") -> Order:
         """Creates order entity"""
+        gc: GlobalContext | None = get_global_context()
+
         order_items: list[OrderItem] = []
 
         for order_item in items:
@@ -27,7 +34,11 @@ class OrdersKeywords:
 
         exec_context: ExecContext | None = get_exec_context(scope)
         if exec_context:
-            order.created = exec_context.audit_info
+            order.created = AuditInfo(
+                exec_context.audit_info.timestamp.start_date,
+                exec_context.audit_info.timestamp.end_date,
+                exec_context.audit_info.user,
+            )
 
         return order
 
@@ -46,7 +57,7 @@ class OrdersKeywords:
         order.id = response["id"]
 
         create_date: datetime = datetime.fromisoformat(response["created"])
-        if create_date in order.created:
+        if create_date in order.created.timestamp:
             order.create_date = create_date
 
         for order_item in response["order_items"]:

@@ -91,7 +91,7 @@ Set Operation Start
     ...
     [Arguments]    ${scope}=${SCOPE}
     ${result}    Pgsql Query    SELECT current_timestamp
-    ${${scope.upper()}_CONTEXT.audit_info.start_date}    Set Variable    ${result}[0][0]
+    ${${scope.upper()}_CONTEXT.audit_info.timestamp.start_date}    Set Variable    ${result}[0][0]
 
 Set Operation End
     [Documentation]
@@ -105,7 +105,7 @@ Set Operation End
     ...
     [Arguments]    ${scope}=${SCOPE}
     ${result}    Pgsql Query    SELECT current_timestamp
-    ${${scope.upper()}_CONTEXT.audit_info.end_date}    Set Variable    ${result}[0][0]
+    ${${scope.upper()}_CONTEXT.audit_info.timestamp.end_date}    Set Variable    ${result}[0][0]
 
 Set Operation User
     [Documentation]

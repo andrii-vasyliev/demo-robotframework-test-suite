@@ -28,15 +28,15 @@ class PgSQLDB:
         if self._pool is None:
             raise Exception("Database is not initialized")
 
-        with self._pool.connection() as conn:
-            with conn.cursor(**kwargs) as cursor:
+        with self._pool.connection() as connection:
+            with connection.cursor(**kwargs) as cursor:
                 try:
                     yield cursor
                 except Exception:
-                    conn.rollback()
+                    connection.rollback()
                     raise
                 else:
-                    conn.commit()
+                    connection.commit()
 
     def query(
         self, query: LiteralString, params: list | None = None, **kwargs

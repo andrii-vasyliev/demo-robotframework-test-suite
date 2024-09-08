@@ -53,9 +53,9 @@ class Customer(Audited):
             self.id,
             self.name,
             self.email,
-            self.created.range if not self.created.range.is_empty else None,
+            self.created.timestamp if not self.created.timestamp.is_empty else None,
             self.created.user,
-            self.updated.range if not self.updated.range.is_empty else None,
+            self.updated.timestamp if not self.updated.timestamp.is_empty else None,
             self.updated.user,
         )
 

@@ -1,27 +1,21 @@
 from datetime import datetime
-from .periodic import Periodic
+from .datetime_range import DateTimeRange
 
 
-class AuditInfo(Periodic):
+class AuditInfo:
     """Base class for operation audit information"""
 
     def __init__(
         self,
-        start: datetime | None = None,
-        end: datetime | None = None,
+        event_start: datetime | None = None,
+        event_end: datetime | None = None,
         user: str | None = None,
     ) -> None:
-        super().__init__(start, end)
+        self.timestamp: DateTimeRange = DateTimeRange(event_start, event_end)
         self.user: str | None = user
 
-    def __contains__(self, other: object) -> bool:
-        if not isinstance(other, datetime):
-            return NotImplemented
-
-        return other in self.range
-
     def __repr__(self) -> str:
-        return f"AuditInfo(range={self.range}, user={self.user})"
+        return f"AuditInfo(timestamp={self.timestamp}, user={self.user})"
 
 
 class Audited:
@@ -37,8 +31,9 @@ class Audited:
 
     @created.setter
     def created(self, value: AuditInfo) -> None:
-        self._created.start_date = value.start_date
-        self._created.end_date = value.end_date
+        self._created.timestamp = DateTimeRange(
+            value.timestamp.start_date, value.timestamp.end_date
+        )
         self._created.user = value.user
 
     @property
@@ -47,6 +42,7 @@ class Audited:
 
     @updated.setter
     def updated(self, value: AuditInfo) -> None:
-        self._updated.start_date = value.start_date
-        self._updated.end_date = value.end_date
+        self._updated.timestamp = DateTimeRange(
+            value.timestamp.start_date, value.timestamp.end_date
+        )
         self._updated.user = value.user

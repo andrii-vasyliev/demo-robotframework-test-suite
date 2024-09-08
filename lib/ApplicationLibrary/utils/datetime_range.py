@@ -2,25 +2,43 @@ from datetime import datetime
 
 
 class DateTimeRange:
-    def __init__(self, start: datetime | None = None, end: datetime | None = None):
-        self.start: datetime | None = start
-        self.end: datetime | None = end
+    def __init__(
+        self, start_date: datetime | None = None, end_date: datetime | None = None
+    ):
+        self._start: datetime | None = start_date
+        self._end: datetime | None = end_date
 
     @property
     def is_empty(self) -> bool:
-        return not (self.start or self.end)
+        return not (self._start or self._end)
+
+    @property
+    def start_date(self) -> datetime | None:
+        return self._start
+
+    @start_date.setter
+    def start_date(self, value: datetime | None) -> None:
+        self._start = value
+
+    @property
+    def end_date(self) -> datetime | None:
+        return self._end
+
+    @end_date.setter
+    def end_date(self, value: datetime | None) -> None:
+        self._end = value
 
     def __eq__(self, other: object) -> bool:
         if other is None or self.is_empty:
             return False
 
         if isinstance(other, datetime):
-            if self.start and self.end:
-                return self.start <= other <= self.end
-            elif self.start:
-                return self.start <= other
-            elif self.end:
-                return self.end >= other
+            if self._start and self._end:
+                return self._start <= other <= self._end
+            elif self._start:
+                return self._start <= other
+            elif self._end:
+                return self._end >= other
             else:
                 return False
 
@@ -28,21 +46,21 @@ class DateTimeRange:
             if other.is_empty:
                 return False
 
-            if self.start and self.end:
-                if not (other.start and other.end):
+            if self._start and self._end:
+                if not (other._start and other._end):
                     return False
-                return other.start == self.start and other.end == self.end
-            elif self.start:
-                if other.start is None:
+                return other._start == self._start and other._end == self._end
+            elif self._start:
+                if other._start is None:
                     return False
-                elif other.end is None:
-                    return other.start == self.start
+                elif other._end is None:
+                    return other._start == self._start
                 else:
                     return False
-            elif self.end:
-                if other.start is None:
-                    return self.end == other.end
-                elif other.end is None:
+            elif self._end:
+                if other._start is None:
+                    return self._end == other._end
+                elif other._end is None:
                     return False
                 else:
                     return False
@@ -79,12 +97,12 @@ class DateTimeRange:
             return False
 
         if isinstance(other, datetime):
-            if self.start and self.end:
-                return self.start <= other <= self.end
-            elif self.start:
-                return self.start <= other
-            elif self.end:
-                return self.end >= other
+            if self._start and self._end:
+                return self._start <= other <= self._end
+            elif self._start:
+                return self._start <= other
+            elif self._end:
+                return self._end >= other
             else:
                 return False
 
@@ -92,26 +110,26 @@ class DateTimeRange:
             if other.is_empty:
                 return False
 
-            if self.start and self.end:
-                if not (other.start and other.end):
+            if self._start and self._end:
+                if not (other._start and other._end):
                     return False
-                return other.start in self and other.end in self
-            elif self.start:
-                if other.start is None:
+                return other._start in self and other._end in self
+            elif self._start:
+                if other._start is None:
                     return False
-                elif other.end is None:
-                    return other.start in self
+                elif other._end is None:
+                    return other._start in self
                 else:
-                    return other.start in self and other.end in self
-            elif self.end:
-                if other.start is None:
-                    return other.end in self
-                elif other.end is None:
+                    return other._start in self and other._end in self
+            elif self._end:
+                if other._start is None:
+                    return other._end in self
+                elif other._end is None:
                     return False
                 else:
-                    return other.start in self and other.end in self
+                    return other._start in self and other._end in self
 
         return NotImplemented
 
     def __repr__(self) -> str:
-        return f"DateTimeRange(start={self.start!r}, end={self.end!r})"
+        return f"DateTimeRange(start={self._start!r}, end={self._end!r})"

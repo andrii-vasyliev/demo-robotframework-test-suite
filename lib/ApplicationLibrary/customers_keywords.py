@@ -1,5 +1,6 @@
 from robot.api.deco import keyword
-from .utils.exec_context import ExecContext, get_exec_context
+from .utils.audited import AuditInfo
+from .exec_context import ExecContext, get_exec_context
 from .entity.customer import Customer
 
 
@@ -16,7 +17,11 @@ class CustomersKeywords:
 
         exec_context: ExecContext | None = get_exec_context(scope)
         if exec_context:
-            customer.created = exec_context.audit_info
+            customer.created = AuditInfo(
+                exec_context.audit_info.timestamp.start_date,
+                exec_context.audit_info.timestamp.end_date,
+                exec_context.audit_info.user,
+            )
             exec_context.customers = customer
 
         return customer

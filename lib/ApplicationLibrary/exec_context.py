@@ -1,8 +1,16 @@
 from typing import Any
+from enum import StrEnum, auto
 from robot.libraries.BuiltIn import BuiltIn
-from ApplicationLibrary.entity.customer import Customer
-from ApplicationLibrary.entity.item import Item
-from .audited import AuditInfo
+from .entity.customer import Customer
+from .entity.item import Item
+from .utils.audited import AuditInfo
+
+
+class ExecContextType(StrEnum):
+    """Enum for the exec context type"""
+
+    TEST = auto()
+    SUITE = auto()
 
 
 class GlobalContext:
@@ -65,9 +73,19 @@ class ExecContext:
         return f"ExecContext(customers={self.customers}, audit_info={self.audit_info})"
 
 
+def get_global_context() -> GlobalContext | None:
+    """
+    Returns a GlobalContext object.
+    """
+    return BuiltIn().get_variable_value(r"${GLOBAL_CONTEXT}", None)
+
+
 def get_exec_context(scope: str = "TEST") -> ExecContext | None:
     """
     Returns an ExecContext object in the given scope.
+    Defaults to the TEST scope.
+    Available scopes: TEST, SUITE
     """
-    context_var: str = "${" + scope + "_CONTEXT}"
-    return BuiltIn().get_variable_value(context_var, None)
+    return BuiltIn().get_variable_value(
+        "${" + ExecContextType[scope] + "_CONTEXT}", None
+    )

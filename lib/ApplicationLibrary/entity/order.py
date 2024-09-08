@@ -39,4 +39,4 @@ class Order(Audited):
         }
 
     def __repr__(self) -> str:
-        return f"Order(id={self.id}, status={self.status}, created={self.created}, items={self.items})"
+        return f"Order(id={self.id}, status={self.status}, create_date={self.create_date}, created={self.created}, updated={self.updated}, items={self.items})"
