@@ -1,9 +1,9 @@
 from typing import Any
-from enum import StrEnum, auto
+from enum import StrEnum
 from robot.libraries.BuiltIn import BuiltIn
-from .entity.customer import Customer
-from .entity.item import Item
-from .utils.audited import AuditInfo
+from ApplicationLibrary.entity.customer import Customer
+from ApplicationLibrary.entity.item import Item
+from ApplicationLibrary.utils.audited import AuditInfo
 
 
 class ExecContextType(StrEnum):
@@ -80,7 +80,9 @@ def get_global_context() -> GlobalContext | None:
     return BuiltIn().get_variable_value(r"${GLOBAL_CONTEXT}", None)
 
 
-def get_exec_context(scope: str = ExecContextType.TEST) -> ExecContext | None:
+def get_exec_context(
+    scope: ExecContextType = ExecContextType.TEST,
+) -> ExecContext | None:
     """
     Returns an ExecContext object in the given scope.
     Defaults to the "TEST" scope.

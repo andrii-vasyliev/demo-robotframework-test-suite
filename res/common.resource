@@ -28,7 +28,6 @@ Project Setup
     ...    - initialize global context object
     ...
     Pgsql Connect    ${DATABASE_URL}
-    Pgsql Execute    DELETE FROM ecommerce.customers CASCADE
     ${catalog}    Pgsql Query    SELECT ecommerce.rf_get_items()
     ${catalog}    Evaluate    tuple(i[0] for i in $catalog)
     ${GLOBAL_CONTEXT}    Define Global Context    ${catalog}

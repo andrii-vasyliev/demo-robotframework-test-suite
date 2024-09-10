@@ -1,9 +1,9 @@
 from robot.api.deco import keyword
-from .exec_context import GlobalContext, ExecContext
+from ApplicationLibrary.exec_context import GlobalContext, ExecContext
 
 
 class ContextKeywords:
-    """Keywords for context management"""
+    """Keywords for execution context management"""
 
     @staticmethod
     @keyword

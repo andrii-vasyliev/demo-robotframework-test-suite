@@ -8,6 +8,7 @@
     "robot.libraries.libdoc.preGenerate": [
         "${workspaceFolder}/lib/ApplicationLibrary",
         "${workspaceFolder}/lib/PostgreSQLLibrary",
+        "${workspaceFolder}/lib/FakeItLibrary",
     ],
     "robot.codeFormatter": "robotidy",
     "robot.completions.keywords.prefixImportName": false,

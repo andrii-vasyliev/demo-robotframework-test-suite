@@ -70,8 +70,9 @@ Get Customers By Parameters Valid Request
     ${params}    Combine Request Parameters    name=${name}    email=${email}    &{custom_params}
     ${response}    GET On Session    API    customers    ${params}
     Validate Get Customers Success Response    ${response}
-    ${customers_json}    Set Variable    ${{ {"customers": [c.json for c in $customers]} }}
-    Dictionaries Should Be Equal    ${customers_json}    ${response.json()}    API response is not as expected
+    ${customers_json}    Evaluate    {"customers": sorted([c.json for c in $customers], key=lambda x: x["id"])}
+    ${sorted_response}    Evaluate    {key: sorted(value, key=lambda x: x["id"]) if isinstance(value, list) else value for key,value in $response.json().items()}
+    Dictionaries Should Be Equal    ${customers_json}    ${sorted_response}    API response is not as expected
 
 Create Customer Invalid Request
     [Documentation]

@@ -1,7 +1,7 @@
 """Order Item entity definition"""
 
 from ApplicationLibrary.utils.audited import Audited
-from .item import Item
+from ApplicationLibrary.entity.item import Item
 
 
 class OrderItem(Audited):

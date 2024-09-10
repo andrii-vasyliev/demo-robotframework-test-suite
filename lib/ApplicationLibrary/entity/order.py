@@ -2,7 +2,7 @@
 
 from datetime import datetime
 from ApplicationLibrary.utils.audited import Audited
-from .order_item import OrderItem
+from ApplicationLibrary.entity.order_item import OrderItem
 
 
 class Order(Audited):

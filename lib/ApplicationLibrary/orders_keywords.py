@@ -1,16 +1,16 @@
 from datetime import datetime
 from robot.api.deco import keyword
-from .utils.audited import AuditInfo
-from .exec_context import (
+from ApplicationLibrary.utils.audited import AuditInfo
+from ApplicationLibrary.exec_context import (
     ExecContextType,
     GlobalContext,
     ExecContext,
     get_global_context,
     get_exec_context,
 )
-from .entity.item import Item
-from .entity.order_item import OrderItem
-from .entity.order import Order
+from ApplicationLibrary.entity.item import Item
+from ApplicationLibrary.entity.order_item import OrderItem
+from ApplicationLibrary.entity.order import Order
 
 
 class OrdersKeywords:
@@ -18,7 +18,9 @@ class OrdersKeywords:
 
     @staticmethod
     @keyword
-    def define_order(items: list[dict], scope: str = ExecContextType.TEST) -> Order:
+    def define_order(
+        items: list[dict], scope: ExecContextType = ExecContextType.TEST
+    ) -> Order:
         """Creates order entity"""
         gc: GlobalContext | None = get_global_context()
 
@@ -46,7 +48,7 @@ class OrdersKeywords:
     @staticmethod
     @keyword
     def populate_order_data_from_response(
-        order: Order, response: dict, scope: str = ExecContextType.TEST
+        order: Order, response: dict, scope: ExecContextType = ExecContextType.TEST
     ) -> None:
         """
         Populates order data from response

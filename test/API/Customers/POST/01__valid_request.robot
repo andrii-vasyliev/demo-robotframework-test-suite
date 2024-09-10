@@ -13,35 +13,56 @@ Test Teardown       Basic Test Teardown
 *** Test Cases ***
 Create customer with valid name and no email
     [Template]    Create Customer Valid Request
-    name=John Reacher
-    name=Grzegorz Brzęczyszczykiewicz
-    name=d'Artagnan
+    name=${{ FakeItLibrary.FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.EN) }}
+    name=${{ FakeItLibrary.FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.RU) }}
+    name=${{ FakeItLibrary.FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.JP) }}
 
 Create customer with valid name and email
     [Template]    Create Customer Valid Request
-    name=John Wick    email=john_wick@bang-bang.laundry
-    name=Grzegorz Brzęczyszczykiewicz    email=brzęczyszczykiewicz@łękołody.ąę
+    name=${{ FakeItLibrary.FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.EN) }}
+    ...    email=${{ FakeItLibrary.FakeItLibrary.fake_customer_email(FakeItLibrary.Locales.EN) }}
+    name=${{ FakeItLibrary.FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.RU) }}
+    ...    email=${{ FakeItLibrary.FakeItLibrary.fake_customer_email(FakeItLibrary.Locales.RU) }}
 
 Create customer with valid name extra cases
     [Template]    Create Customer Valid Request
-    name=Mr. \\Quick-Fix/_&,
-    name=${SPACE}X Starship dives Into${SPACE*3}
-    name=${{ '\n\nLFs in the name\n' }}
-    name=${{ '\tTabs in the name\t\t' }}
+    name=\/.'${{ FakeItLibrary.FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.PL) }}_&,-+@
+    name=${SPACE}${{ FakeItLibrary.FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.PL) }}${SPACE*3}
+    name=${{ '\n\n' + FakeItLibrary.FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.PL) + '\n' }}
+    name=${{ '\t' + FakeItLibrary.FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.PL) + '\t\t' }}
 
 Create customer with valid email extra cases
     [Template]    Create Customer Valid Request
-    name=Email Allowed Chars    email=-+._aZ0@zA-9.eu
-    name=Email Minimum Chars    email=a@a.eu
-    name=Email with spaces    email=${SPACE*2}validemail@x.com${SPACE}
-    name=Email with tabs    email=${{ '\t\tvalidemail@x.com\t' }}
-    name=Email with LFs    email=${{ '\nvalidemail@x.com\n\n' }}
+    name=${{ FakeItLibrary.FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.PL) }}
+    ...    email=-+._aZ0@zA-9.eu
+    name=${{ FakeItLibrary.FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.PL) }}
+    ...    email=a@a.eu
+    name=${{ FakeItLibrary.FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.PL) }}
+    ...    email=${SPACE*2}validemail@x.com${SPACE}
+    name=${{ FakeItLibrary.FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.PL) }}
+    ...    email=${{ '\t\tvalidemail@x.com\t' }}
+    name=${{ FakeItLibrary.FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.PL) }}
+    ...    email=${{ '\nvalidemail@x.com\n\n' }}
     # Email is not valid, but this is how default pydantic validation works
-    name=John Doe    email=invalidemail@com.c
+    name=${{ FakeItLibrary.FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.PL) }}
+    ...    email=invalidemail@com.c
 
 Create customer customer uniqueness
+    [Setup]    Setup Uniqueness Case
     [Template]    Create Customer Valid Request
-    name=Same Name Diff Emails    email=someone@email.me
-    name=Same Name Diff Emails
-    name=Same Name Diff Emails    email=someone@dont.email.me
-    name=Diff Name Same Email    email=someone@email.me
+    name=${name1}    email=${email1}
+    name=${name1}
+    name=${name1}    email=${email2}
+    name=${name2}    email=${email1}
+
+*** Keywords ***
+Setup Uniqueness Case
+    Basic Test Setup
+    ${name1}    Set Variable    ${{ FakeItLibrary.FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.PL) }}
+    ${name2}    Set Variable    ${{ FakeItLibrary.FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.PL) }}
+    ${email1}    Set Variable    ${{ FakeItLibrary.FakeItLibrary.fake_customer_email(FakeItLibrary.Locales.PL) }}
+    ${email2}    Set Variable    ${{ FakeItLibrary.FakeItLibrary.fake_customer_email(FakeItLibrary.Locales.PL) }}
+    VAR    ${name1}    ${name1}    scope=TEST
+    VAR    ${name2}    ${name2}    scope=TEST
+    VAR    ${email1}    ${email1}    scope=TEST
+    VAR    ${email2}    ${email2}    scope=TEST

@@ -7,6 +7,7 @@ Library             RequestsLibrary
 Library             FakerLibrary    locale=pl_PL
 Library             ApplicationLibrary
 Library             PostgreSQLLibrary
+Library             FakeItLibrary
 Resource            common.resource
 Resource            rest.robot
 Resource            api_common.resource

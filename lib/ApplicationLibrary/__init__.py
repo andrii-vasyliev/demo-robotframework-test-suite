@@ -1,4 +1,4 @@
-"""Dynamic custom keywords library"""
+"""Application custom keywords library"""
 
 from robot.api.deco import library
 from .customers_keywords import CustomersKeywords
@@ -8,4 +8,4 @@ from .context_keywords import ContextKeywords
 
 @library(scope="GLOBAL", version="1.0.0", auto_keywords=False)
 class ApplicationLibrary(CustomersKeywords, OrdersKeywords, ContextKeywords):
-    """Library provides custom classes and keywords"""
+    """Library provides custom classes and keywords to use in the custom test framework"""
