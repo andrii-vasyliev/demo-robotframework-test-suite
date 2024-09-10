@@ -4,7 +4,7 @@ from datetime import datetime
 class DateTimeRange:
     def __init__(
         self, start_date: datetime | None = None, end_date: datetime | None = None
-    ):
+    ) -> None:
         self._start: datetime | None = start_date
         self._end: datetime | None = end_date
 

@@ -8,7 +8,7 @@ from ApplicationLibrary.entity.order_item import OrderItem
 class Order(Audited):
     """Order entity"""
 
-    def __init__(self, order_id: str | None, order_items: list[OrderItem]):
+    def __init__(self, order_id: str | None, order_items: list[OrderItem]) -> None:
         super().__init__()
         self.id: str | None = order_id
         self._status: str = "New"

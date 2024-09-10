@@ -1,4 +1,4 @@
-from typing import LiteralString
+from typing import Any, List, LiteralString, Tuple
 from robot.api.deco import library, keyword
 from .database import PgSQLDB
 
@@ -9,11 +9,11 @@ class PostgreSQLLibrary:
     Library provides an interface for accessing PostgreSQL database.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         self._db: PgSQLDB | None = None
 
     @keyword()
-    def pgsql_connect(self, url: str):
+    def pgsql_connect(self, url: str) -> None:
         """
         Connect to PostgreSQL database.
         """
@@ -24,7 +24,7 @@ class PostgreSQLLibrary:
         self._db.connect(url)
 
     @keyword()
-    def pgsql_close(self):
+    def pgsql_close(self) -> None:
         """
         Disconnect from PostgreSQL database.
         """
@@ -35,20 +35,22 @@ class PostgreSQLLibrary:
         self._db = None
 
     @keyword()
-    def pgsql_query(self, query: LiteralString, params: list | None = None, **kwargs):
+    def pgsql_query(
+        self, query: LiteralString, params: list | None = None, **kwargs
+    ) -> List[Tuple[Any, ...]]:
         """
         Execute query on PostgreSQL database.
         """
         if self._db is None:
             raise Exception("PostgreSQL database is not initialized")
 
-        result = self._db.query(query, params, **kwargs)
+        result: List[Tuple[Any, ...]] = self._db.query(query, params, **kwargs)
         return result
 
     @keyword()
     def pgsql_execute(
         self, command: LiteralString, params: list | None = None, **kwargs
-    ):
+    ) -> None:
         """
         Execute command on PostgreSQL database.
         """

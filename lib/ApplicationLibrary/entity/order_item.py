@@ -7,7 +7,7 @@ from ApplicationLibrary.entity.item import Item
 class OrderItem(Audited):
     """Order Item entity"""
 
-    def __init__(self, item: Item, quantity: int):
+    def __init__(self, item: Item, quantity: int) -> None:
         super().__init__()
         self.id: str | None = None
         self.item: Item = item

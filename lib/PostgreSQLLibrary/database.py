@@ -5,7 +5,7 @@ from psycopg_pool import ConnectionPool
 
 
 class PgSQLDB:
-    def __init__(self):
+    def __init__(self) -> None:
         self._pool: ConnectionPool | None = None
 
     def connect(self, uri) -> None:
