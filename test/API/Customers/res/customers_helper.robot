@@ -22,7 +22,7 @@ Create Customer Valid Request
     ${body}    Create Dictionary    &{args}
     Set Operation User
     Set Operation Start
-    ${response}    Do POST    API    customers    ${body}
+    ${response}    Do POST    API    customers/    ${body}
     Set Operation End
     Validate Create Customer Success Response    ${response}
     ${c}    Define Customer
@@ -68,7 +68,7 @@ Get Customers By Parameters Valid Request
     ...
     [Arguments]    ${name}=${None}    ${email}=${None}    @{customers}    &{custom_params}
     ${params}    Combine Request Parameters    name=${name}    email=${email}    &{custom_params}
-    ${response}    GET On Session    API    customers    ${params}
+    ${response}    GET On Session    API    customers/    ${params}
     Validate Get Customers Success Response    ${response}
     ${customers_json}    Evaluate    {"customers": sorted([c.json for c in $customers], key=lambda x: x["id"])}
     ${sorted_response}    Evaluate    {key: sorted(value, key=lambda x: x["id"]) if isinstance(value, list) else value for key,value in $response.json().items()}
@@ -91,7 +91,7 @@ Create Customer Invalid Request
     ...
     [Arguments]    ${expected_status}    ${msg}    &{args}
     ${body}    Create Dictionary    &{args}
-    ${response}    Do POST    API    customers    ${body}    expected_status=any
+    ${response}    Do POST    API    customers/    ${body}    expected_status=any
     Validate API Error Response    ${response}    ${expected_status}
     Should Contain    ${response.json()}[detail][0][msg]    ${msg}    Incorrect Create Customer error message
 
@@ -112,7 +112,7 @@ Create Customer Wrong Body Or Mimetype
     ...    - ``&args``    named arguments to be passed to ``Post On Session``
     ...
     [Arguments]    ${expected_status}    ${msg}    ${body}    &{args}
-    ${response}    Do POST    API    customers    ${body}    expected_status=any    &{args}
+    ${response}    Do POST    API    customers/    ${body}    expected_status=any    &{args}
     Validate API Error Response    ${response}    ${expected_status}
     Should Contain    ${response.json()}[detail][0][msg]    ${msg}    Incorrect Create Customer error message
 
@@ -153,6 +153,6 @@ Get Customers By Parameters Invalid Request
     ...
     [Arguments]    ${expected_status}    ${msg}    &{args}
     ${params}    Combine Request Parameters    &{args}
-    ${response}    GET On Session    API    customers    ${params}    expected_status=any
+    ${response}    GET On Session    API    customers/    ${params}    expected_status=any
     Validate API Error Response    ${response}    ${expected_status}
     Should Contain    ${response.json()}[detail][0][msg]    ${msg}    Incorrect Get Customers error message
