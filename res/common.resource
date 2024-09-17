@@ -2,7 +2,9 @@
 Documentation       Basic project keywords:
 ...                 - ``Project Setup``    Performs basic test project setup
 ...                 - ``Project Teardown``    Performs basic test project teardown
-...                 - ``Basic Suite Setup``    Performs basic suite setup
+...                 - ``Basic Suites Setup``    Performs basic suites setup (context is accessible in current suite and its sub-suites)
+...                 - ``Basic Suites Teardown``    Performs basic suites teardown
+...                 - ``Basic Suite Setup``    Performs basic suite setup (context is accessible only in current suite)
 ...                 - ``Basic Suite Teardown``    Performs basic suite teardown
 ...                 - ``Basic Test Setup``    Performs basic test case setup
 ...                 - ``Basic Test Teardown``    Performs basic test case teardown
@@ -15,9 +17,14 @@ Resource            project_settings.resource
 
 *** Variables ***
 ${GLOBAL_CONTEXT}       ${None}
+${SUITES_CONTEXT}       ${None}
 ${SUITE_CONTEXT}        ${None}
 ${TEST_CONTEXT}         ${None}
 ${SCOPE}                ${None}
+${GLOBAL}               ${{ ApplicationLibrary.exec_context.GlobalContextType.GLOBAL }}
+${SUITES}               ${{ ApplicationLibrary.exec_context.ExecContextType.SUITES }}
+${SUITE}                ${{ ApplicationLibrary.exec_context.ExecContextType.SUITE }}
+${TEST}                 ${{ ApplicationLibrary.exec_context.ExecContextType.TEST }}
 
 
 *** Keywords ***
@@ -31,7 +38,7 @@ Project Setup
     ${catalog}    Pgsql Query    SELECT ecommerce.rf_get_items()
     ${catalog}    Evaluate    tuple(i[0] for i in $catalog)
     ${GLOBAL_CONTEXT}    Define Global Context    ${catalog}
-    VAR    ${GLOBAL_CONTEXT}    ${GLOBAL_CONTEXT}    scope=GLOBAL
+    VAR    ${GLOBAL_CONTEXT}    ${GLOBAL_CONTEXT}    scope=${GLOBAL}
 
 Project Teardown
     [Documentation]
@@ -42,14 +49,36 @@ Project Teardown
     Pgsql Close
     Dispose Global Context
 
+Basic Suites Setup
+    [Documentation]
+    ...    Performs basic suites setup:
+    ...    - defines suites execution context
+    ...
+    ...    Context is accessible in current suite and its sub-suites
+    ...
+    ${SUITES_CONTEXT}    Define Suite Context
+    VAR    ${SUITES_CONTEXT}    ${SUITES_CONTEXT}    scope=${SUITES}
+    VAR    ${SCOPE}    ${SUITES}    scope=${SUITES}
+
+Basic Suites Teardown
+    [Documentation]
+    ...    Performs basic suites teardown:
+    ...    - disposes suites execution context
+    ...
+    Dispose Suite Context
+    VAR    ${SCOPE}    ${None}    scope=${SUITES}
+    VAR    ${SUITES_CONTEXT}    ${None}    scope=${SUITES}
+
 Basic Suite Setup
     [Documentation]
     ...    Performs basic suite setup:
     ...    - defines suite execution context
     ...
+    ...    Context is accessible only in current suite
+    ...
     ${SUITE_CONTEXT}    Define Suite Context
-    VAR    ${SUITE_CONTEXT}    ${SUITE_CONTEXT}    scope=SUITE
-    VAR    ${SCOPE}    SUITE    scope=SUITE
+    VAR    ${SUITE_CONTEXT}    ${SUITE_CONTEXT}    scope=${SUITE}
+    VAR    ${SCOPE}    ${SUITE}    scope=${SUITE}
 
 Basic Suite Teardown
     [Documentation]
@@ -57,8 +86,8 @@ Basic Suite Teardown
     ...    - disposes suite execution context
     ...
     Dispose Suite Context
-    VAR    ${SCOPE}    ${None}    scope=SUITE
-    VAR    ${SUITE_CONTEXT}    ${None}    scope=SUITE
+    VAR    ${SCOPE}    ${None}    scope=${SUITE}
+    VAR    ${SUITE_CONTEXT}    ${None}    scope=${SUITE}
 
 Basic Test Setup
     [Documentation]
@@ -66,8 +95,8 @@ Basic Test Setup
     ...    - defines test execution context
     ...
     ${TEST_CONTEXT}    Define Test Context
-    VAR    ${TEST_CONTEXT}    ${TEST_CONTEXT}    scope=TEST
-    VAR    ${SCOPE}    TEST    scope=TEST
+    VAR    ${TEST_CONTEXT}    ${TEST_CONTEXT}    scope=${TEST}
+    VAR    ${SCOPE}    ${TEST}    scope=${TEST}
 
 Basic Test Teardown
     [Documentation]
@@ -75,8 +104,8 @@ Basic Test Teardown
     ...    - disposes test execution context
     ...
     Dispose Test Context
-    VAR    ${SCOPE}    ${None}    scope=TEST
-    VAR    ${TEST_CONTEXT}    ${None}    scope=TEST
+    VAR    ${SCOPE}    ${None}    scope=${TEST}
+    VAR    ${TEST_CONTEXT}    ${None}    scope=${TEST}
 
 Set Operation Start
     [Documentation]

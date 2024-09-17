@@ -6,11 +6,18 @@ from ApplicationLibrary.entity.item import Item
 from ApplicationLibrary.utils.audited import AuditInfo
 
 
+class GlobalContextType(StrEnum):
+    """Enum for the global context type"""
+
+    GLOBAL = "GLOBAL"
+
+
 class ExecContextType(StrEnum):
     """Enum for the exec context type"""
 
     TEST = "TEST"
     SUITE = "SUITE"
+    SUITES = "SUITES"
 
 
 class GlobalContext:
@@ -73,11 +80,17 @@ class ExecContext:
         return f"ExecContext(customers={self.customers}, audit_info={self.audit_info})"
 
 
-def get_global_context() -> GlobalContext | None:
+def get_global_context(
+    context: GlobalContextType = GlobalContextType.GLOBAL,
+) -> GlobalContext | None:
     """
-    Returns a GlobalContext object.
+    Returns a GlobalContext object of the given type.
+    Defaults to the "GLOBAL" type.
+    Available types: "GLOBAL"
     """
-    return BuiltIn().get_variable_value(r"${GLOBAL_CONTEXT}", None)
+    return BuiltIn().get_variable_value(
+        "${" + GlobalContextType[context.upper()] + "_CONTEXT}", None
+    )
 
 
 def get_exec_context(
@@ -86,7 +99,7 @@ def get_exec_context(
     """
     Returns an ExecContext object in the given scope.
     Defaults to the "TEST" scope.
-    Available scopes: "TEST", "SUITE"
+    Available scopes: "TEST", "SUITE", "SUITES"
     """
     return BuiltIn().get_variable_value(
         "${" + ExecContextType[scope.upper()] + "_CONTEXT}", None
