@@ -115,7 +115,7 @@ Set Operation Start
     ...    to determine if create date of the object is acceptable.
     ...
     ...    Parameters:
-    ...    - ``scope``    context to work with, ``SUITE`` or ``TEST``, default current scope
+    ...    - ``scope``    context to work with, ``SUITES``, ``SUITE`` or ``TEST``, default current scope
     ...
     [Arguments]    ${scope}=${SCOPE}
     ${result}    Pgsql Query    SELECT current_timestamp
@@ -129,7 +129,7 @@ Set Operation End
     ...    to determine if create date of the object is acceptable.
     ...
     ...    Parameters:
-    ...    - ``scope``    context to work with, ``SUITE`` or ``TEST``, default current scope
+    ...    - ``scope``    context to work with, ``SUITES``, ``SUITE`` or ``TEST``, default current scope
     ...
     [Arguments]    ${scope}=${SCOPE}
     ${result}    Pgsql Query    SELECT current_timestamp
@@ -144,7 +144,7 @@ Set Operation User
     ...
     ...    Parameters:
     ...    - ``user_name``    user name that is an author of the operation, default ``api``
-    ...    - ``scope``    context to work with, ``SUITE`` or ``TEST``, default current scope
+    ...    - ``scope``    context to work with, ``SUITES``, ``SUITE`` or ``TEST``, default current scope
     ...
     [Arguments]    ${user_name}=api    ${scope}=${SCOPE}
     ${${scope.upper()}_CONTEXT.audit_info.user}    Set Variable    ${user_name}
