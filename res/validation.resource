@@ -7,13 +7,8 @@ Resource            project_settings.resource
 *** Keywords ***
 Validate Customers
     [Arguments]    @{customers}
-    ${expected}    Create List
-    ${customer_ids}    Create List
-    FOR    ${customer}    IN    @{customers}
-        Append To List    ${expected}    ${customer.row}
-        Append To List    ${customer_ids}    ${customer.id}
-    END
-    ${expected}    Evaluate    sorted([customer_row for customer_row in $expected], key=lambda x: x[0])
+    ${customer_ids}    Evaluate    [customer.id for customer in $customers]
+    ${expected}    Evaluate    sorted([customer.row for customer in $customers], key=lambda x: x[0])
     ${result}    PG Get Customers By Ids    @{customer_ids}
     Lists Should Be Equal    ${expected}    ${result}    Customers are not as expected
 
