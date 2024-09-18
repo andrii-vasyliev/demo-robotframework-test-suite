@@ -62,10 +62,10 @@ Best served with [Microsoft Visual Studio Code](https://code.visualstudio.com/) 
 
 Project consists of following folders:
 
-- Folder `etc` contains `robot_args.txt` file with Robot Framework arguments to use with Robot Framework Language Server
+- Folder `etc` is designed to keep project-related configuration files
 - Folder `etc/env` contains variable files named by test environments containing environment configuration details, i.e. database connection string, API url, etc.
 - Folder `lib` contains custom libraries that provide keywords for the custom test framework
-- Folder `log` is used to store test execution reports and logs
+- Folder `log` is designed to keep test execution reports and logs
 - Folder `res` contains custom test framework
 - Folder `test` is a global test suite
 
