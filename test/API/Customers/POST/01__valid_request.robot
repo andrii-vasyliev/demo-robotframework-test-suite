@@ -48,12 +48,13 @@ Create customer with valid email extra cases
     ...    email=invalidemail@com.c
 
 Create customer customer uniqueness
-    [Setup]    Setup Uniqueness Case
     [Template]    Create Customer Valid Request
+    [Setup]    Setup Uniqueness Case
     name=${name1}    email=${email1}
     name=${name1}
     name=${name1}    email=${email2}
     name=${name2}    email=${email1}
+
 
 *** Keywords ***
 Setup Uniqueness Case
@@ -62,7 +63,7 @@ Setup Uniqueness Case
     ${name2}    Set Variable    ${{ FakeItLibrary.FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.PL) }}
     ${email1}    Set Variable    ${{ FakeItLibrary.FakeItLibrary.fake_customer_email(FakeItLibrary.Locales.PL) }}
     ${email2}    Set Variable    ${{ FakeItLibrary.FakeItLibrary.fake_customer_email(FakeItLibrary.Locales.PL) }}
-    VAR    ${name1}    ${name1}    scope=TEST
-    VAR    ${name2}    ${name2}    scope=TEST
-    VAR    ${email1}    ${email1}    scope=TEST
-    VAR    ${email2}    ${email2}    scope=TEST
+    VAR    ${name1}    ${name1}    scope=${TEST}
+    VAR    ${name2}    ${name2}    scope=${TEST}
+    VAR    ${email1}    ${email1}    scope=${TEST}
+    VAR    ${email2}    ${email2}    scope=${TEST}

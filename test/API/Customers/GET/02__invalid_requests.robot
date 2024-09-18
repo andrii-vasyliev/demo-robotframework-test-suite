@@ -32,26 +32,26 @@ Customer name or email is unknown
 
 Get customer by unknown parameters
     [Template]    Get Customers By Parameters Invalid Request
-    ${400}    At least one search parameter is required    first_name=${SUITE_CONTEXT.customers[0].name}    default_email=${SUITE_CONTEXT.customers[0].email}
+    ${400}    At least one search parameter is required    first_name=${${SUITE}_CONTEXT.customers[0].name}    default_email=${${SUITE}_CONTEXT.customers[0].email}
 
 SQL injections
     Get Customer By Id Invalid Request
     ...    ${422}
     ...    Input should be a valid UUID
-    ...    ${SUITE_CONTEXT.customers[0].id}' or ''='
+    ...    ${${SUITE}_CONTEXT.customers[0].id}' or ''='
     Get Customers By Parameters Invalid Request
     ...    ${404}
     ...    Customer not found
-    ...    name=${SUITE_CONTEXT.customers[0].name}' or ''='
+    ...    name=${${SUITE}_CONTEXT.customers[0].name}' or ''='
     Get Customers By Parameters Invalid Request
     ...    ${404}
     ...    Customer not found
-    ...    email=${SUITE_CONTEXT.customers[0].email}' or ''='
+    ...    email=${${SUITE}_CONTEXT.customers[0].email}' or ''='
     Get Customers By Parameters Invalid Request
     ...    ${404}
     ...    Customer not found
-    ...    name=${SUITE_CONTEXT.customers[0].name}' or ''='
-    ...    email=${SUITE_CONTEXT.customers[0].email}' or ''='
+    ...    name=${${SUITE}_CONTEXT.customers[0].name}' or ''='
+    ...    email=${${SUITE}_CONTEXT.customers[0].email}' or ''='
 
 
 *** Keywords ***

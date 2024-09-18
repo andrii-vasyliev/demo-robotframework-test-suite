@@ -21,7 +21,7 @@ API Create Customer
     ...    Parameters:
     ...    - ``name``    customer name, default ``EMPTY``
     ...    - ``email``    customer email, default ``EMPTY``
-    ...    - ``scope``    context to work with, ``SUITE`` or ``TEST``, default ``TEST``
+    ...    - ``scope``    context to work with, ``SUITES``, ``SUITE`` or ``TEST``, default is current scope
     ...
     ...    The ``parameters`` are processed as follows:
     ...    - when ``parameter`` is ``None`` it is not populated

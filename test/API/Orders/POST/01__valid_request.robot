@@ -8,10 +8,10 @@ Test Teardown       Basic Test Teardown
 
 
 *** Variables ***
-&{MB}               item_id=${GLOBAL_CONTEXT.catalog[0].id}    quantity=${1}
-&{MEM}              item_id=${GLOBAL_CONTEXT.catalog[1].id}    quantity=${2}
-&{CF}               item_id=${GLOBAL_CONTEXT.catalog[2].id}    quantity=${1}
-&{PROC}             item_id=${GLOBAL_CONTEXT.catalog[3].id}    quantity=${1}
+&{MB}               item_id=${${GLOBAL}_CONTEXT.catalog[0].id}    quantity=${1}
+&{MEM}              item_id=${${GLOBAL}_CONTEXT.catalog[1].id}    quantity=${2}
+&{CF}               item_id=${${GLOBAL}_CONTEXT.catalog[2].id}    quantity=${1}
+&{PROC}             item_id=${${GLOBAL}_CONTEXT.catalog[3].id}    quantity=${1}
 @{ONE_ITEM}         ${MB}
 @{FEW_ITEMS}        ${MB}    ${MEM}    ${PROC}
 @{SAME_ITEMS}       ${CF}    ${CF}
@@ -21,10 +21,10 @@ Test Teardown       Basic Test Teardown
 *** Test Cases ***
 Create order
     [Template]    Create Order Valid Request
-    customer_id=${TEST_CONTEXT.customers[0].id}    items=${ONE_ITEM}
-    customer_id=${TEST_CONTEXT.customers[0].id}    items=${FEW_ITEMS}
-    customer_id=${TEST_CONTEXT.customers[0].id}    items=${SAME_ITEMS}
-    customer_id=${TEST_CONTEXT.customers[0].id}    items=${MIX_ITEMS}
+    customer_id=${${TEST}_CONTEXT.customers[0].id}    items=${ONE_ITEM}
+    customer_id=${${TEST}_CONTEXT.customers[0].id}    items=${FEW_ITEMS}
+    customer_id=${${TEST}_CONTEXT.customers[0].id}    items=${SAME_ITEMS}
+    customer_id=${${TEST}_CONTEXT.customers[0].id}    items=${MIX_ITEMS}
 
 
 *** Keywords ***

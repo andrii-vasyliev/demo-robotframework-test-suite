@@ -19,17 +19,18 @@ DB Query
     Log    ${result}
 
 Check Init 1
-    IF    $SUITE_CONTEXT    Log    ${SUITE_CONTEXT}
-    IF    $TEST_CONTEXT
+    IF    $${SUITE}_CONTEXT    Log    ${${SUITE}_CONTEXT}
+    IF    $${TEST}_CONTEXT
         Set Operation Start
-        Log    ${TEST_CONTEXT}
+        Log    ${${TEST}_CONTEXT}
     END
+    Log Variables
 
 Check Init 2
-    IF    $SUITE_CONTEXT    Log    ${SUITE_CONTEXT}
-    IF    $TEST_CONTEXT
+    IF    $${SUITE}_CONTEXT    Log    ${${SUITE}_CONTEXT}
+    IF    $${TEST}_CONTEXT
         Set Operation Start
-        Log    ${TEST_CONTEXT}
+        Log    ${${TEST}_CONTEXT}
     END
 
 PG List
@@ -40,7 +41,6 @@ PG List
     ${expected}    Create List    ${c1.row}    ${c2.row}
     Lists Should Be Equal    ${expected}    ${result}
 
-
 Faker
     ${name}    Fake Customer Name
     ${name}    Fake Customer Name    PL
@@ -50,6 +50,7 @@ Faker
     ${email}    Fake Customer Email    RU    .
     ${email}    Fake Customer Email    RU    ${EMPTY}
     Log    ${{ FakeItLibrary.FakeItLibrary.fake_customer_email(FakeItLibrary.Locales.EN) }}
+
 
 *** Keywords ***
 Setup Suite

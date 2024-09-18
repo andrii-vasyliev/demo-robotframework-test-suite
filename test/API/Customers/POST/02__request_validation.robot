@@ -54,8 +54,8 @@ Create customer email validation
 Create customer uniqueness validation
     [Template]    Create Customer Invalid Request
     [Setup]    Setup Uniqueness Validation Case
-    ${409}    Customer already exist    name=${TEST_CONTEXT.customers[0].name}
-    ${409}    Customer already exist    name=${TEST_CONTEXT.customers[1].name}    email=${TEST_CONTEXT.customers[1].email}
+    ${409}    Customer already exist    name=${${TEST}_CONTEXT.customers[0].name}
+    ${409}    Customer already exist    name=${${TEST}_CONTEXT.customers[1].name}    email=${${TEST}_CONTEXT.customers[1].email}
 
 
 *** Keywords ***
