@@ -10,6 +10,10 @@ Resource            project_settings.resource
 Variables           api_common_jsd.py
 
 
+*** Variables ***
+&{DEFAULT_API_HEADERS}      Content-Type=application/json    Accept=application/json
+
+
 *** Keywords ***
 Setup API Session
     [Documentation]
@@ -19,10 +23,7 @@ Setup API Session
     Should Be True
     ...    $api and isinstance($api, dict) and $api.get('url', None)
     ...    API url is not defined or invalid for the environment "${ENV_NAME}"
-    ${headers}    Create Dictionary
-    ...    Content-Type=application/json
-    ...    Accept=application/json
-    Create Session    API    ${api}[url]${api.get('uri', '')}    ${headers}
+    Create Session    API    ${api}[url]${api.get('uri', '')}    headers=${DEFAULT_API_HEADERS}
 
 Validate API Response Template
     [Documentation]

@@ -65,13 +65,15 @@ Get Customers By Parameters Valid Request
     ...    - ``name``    customer name
     ...    - ``email``    customer email
     ...    - ``customers``    expected customer entities to get
+    ...    - ``custom_params``    some additional query parameters
     ...
     [Arguments]    ${name}=${None}    ${email}=${None}    @{customers}    &{custom_params}
     ${params}    Combine Request Parameters    name=${name}    email=${email}    &{custom_params}
     ${response}    GET On Session    API    customers/    ${params}
     Validate Get Customers Success Response    ${response}
     ${customers_json}    Evaluate    {"customers": sorted([c.json for c in $customers], key=lambda x: x["id"])}
-    ${sorted_response}    Evaluate    {key: sorted(value, key=lambda x: x["id"]) if isinstance(value, list) else value for key,value in $response.json().items()}
+    ${sorted_response}    Evaluate
+    ...    {key: sorted(value, key=lambda x: x["id"]) if isinstance(value, list) else value for key,value in $response.json().items()}
     Dictionaries Should Be Equal    ${customers_json}    ${sorted_response}    API response is not as expected
 
 Create Customer Invalid Request
@@ -109,14 +111,14 @@ Create Customer Wrong Body Or Mimetype
     ...    - ``expected_status``    expected response HTTP status code
     ...    - ``msg``    expected error message
     ...    - ``body``    payload to send
-    ...    - ``&args``    named arguments to be passed to ``Post On Session``
+    ...    - ``&args``    named arguments to be passed to ``Post On Session`` keyword
     ...
     [Arguments]    ${expected_status}    ${msg}    ${body}    &{args}
     ${response}    Do POST    API    customers/    ${body}    expected_status=any    &{args}
     Validate API Error Response    ${response}    ${expected_status}
     Should Contain    ${response.json()}[detail][0][msg]    ${msg}    Incorrect Create Customer error message
 
-Get Customer By Id Invalid Request
+ Get Customer By Id Invalid Request
     [Documentation]
     ...    Sends Get request to API Customers that is expected to be invalid.
     ...
@@ -129,10 +131,11 @@ Get Customer By Id Invalid Request
     ...    Parameters:
     ...    - ``expected_status``    expected response HTTP status code
     ...    - ``msg``    expected error message
+    ...    - ``get_args``    additional arguments to be passed to ``Get On Session`` keyword
     ...    - ``customer_id``    id of the customer to Get
     ...
-    [Arguments]    ${expected_status}    ${msg}    ${customer_id}
-    ${response}    GET On Session    API    customers/${customer_id}    expected_status=any
+    [Arguments]    ${expected_status}    ${msg}    ${get_args}=&{EMPTY}    ${customer_id}=${EMPTY}
+    ${response}    GET On Session    API    customers/${customer_id}    expected_status=any    &{get_args}
     Validate API Error Response    ${response}    ${expected_status}
     Should Contain    ${response.json()}[detail][0][msg]    ${msg}    Incorrect Get Customer error message
 
@@ -149,10 +152,11 @@ Get Customers By Parameters Invalid Request
     ...    Parameters:
     ...    - ``expected_status``    expected response HTTP status code
     ...    - ``msg``    expected error message
-    ...    - ``&args``    named arguments to be passed to ``Get On Session``
+    ...    - ``get_args``    additional arguments to be passed to ``Get On Session`` keyword
+    ...    - ``&args``    named arguments to be passed to ``Get On Session`` as query parameters
     ...
-    [Arguments]    ${expected_status}    ${msg}    &{args}
+    [Arguments]    ${expected_status}    ${msg}    ${get_args}=&{EMPTY}    &{args}
     ${params}    Combine Request Parameters    &{args}
-    ${response}    GET On Session    API    customers/    ${params}    expected_status=any
+    ${response}    GET On Session    API    customers/    ${params}    expected_status=any    &{get_args}
     Validate API Error Response    ${response}    ${expected_status}
     Should Contain    ${response.json()}[detail][0][msg]    ${msg}    Incorrect Get Customers error message

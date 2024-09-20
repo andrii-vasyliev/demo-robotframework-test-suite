@@ -15,7 +15,7 @@ ${NOT_JSON_BODY}            {"name": "John Wick" "email": "john_wick@bang-bang.l
 &{JSON_BODY_EXTRA}          name=John Wick    email=john_wick@bang-bang.laundry    id=123456
 &{JSON_BODY}                name=John Wick    email=john_wick@bang-bang.laundry
 &{XML_CONTENT_HEADERS}      Content-Type=application/xml
-&{TEXT_ACCEPT_HEADERS}      Accept=application/text
+&{TEXT_ACCEPT_HEADERS}      Accept=text/plain
 
 
 *** Test Cases ***
@@ -29,5 +29,4 @@ Create Customer with a wrong body or mimetype
     ${422}    Extra inputs are not permitted    ${JSON_BODY_EXTRA}
     ${422}    Input should be a valid dictionary or object    ${JSON_BODY}    headers=${XML_CONTENT_HEADERS}
     ${422}    Input should be a valid dictionary or object    ${XML_BODY}    headers=${XML_CONTENT_HEADERS}
-    # Following case is ignored by FastAPI, so do we
-    # ${406}    Unsupported response content type    ${JSON_BODY}    headers=${TEXT_ACCEPT_HEADERS}
+    ${406}    This endpoint only supports application/json responses    ${JSON_BODY}    headers=${TEXT_ACCEPT_HEADERS}
