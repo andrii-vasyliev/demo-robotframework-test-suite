@@ -33,11 +33,12 @@ class Customer(Audited):
     @email.setter
     def email(self, email: str | None) -> None:
         """Sets customer email"""
-        if email and email.strip():
-            at_pos: int = email.find("@")
+        customer_email: str | None = email.strip() if email else email
+        if customer_email:
+            at_pos: int = customer_email.find("@")
             self._email: str | None = (
-                email[: at_pos + 1] + email[at_pos + 1 :].lower()
-            ).strip()
+                customer_email[: at_pos + 1] + customer_email[at_pos + 1 :].lower()
+            ).strip("<>")
         else:
             self._email = None
 

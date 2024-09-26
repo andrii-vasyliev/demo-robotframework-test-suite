@@ -1,5 +1,7 @@
 *** Settings ***
 Documentation       API Create Customer wrong requests test cases
+Metadata            https://company-jira.atlassian.com/browse/original-requirement
+Metadata            https://company-jira.atlassian.com/browse/change-request
 
 Resource            ../../../../res/project_settings.resource
 Resource            ../res/customers_helper.robot
@@ -19,7 +21,19 @@ ${NOT_JSON_BODY}            {"name": "John Wick" "email": "john_wick@bang-bang.l
 
 
 *** Test Cases ***
-Create Customer with a wrong body or mimetype
+Create Customer with a wrong body or MIME type
+    [Documentation]    Create Customer with a wrong body or MIME type
+    ...
+    ...    - Request with XML body and JSON Content-Type headers is rejected
+    ...    - Request with String body and JSON Content-Type headers is rejected
+    ...    - Request without body is rejected
+    ...    - Request with empty body is rejected
+    ...    - Request with wrong JSON body is rejected
+    ...    - Request with extra data is rejected
+    ...    - Request with correct JSON body but wrong Content-Type headers is rejected
+    ...    - Request with XML body and XML Content-Type headers is rejected
+    ...    - Request with correct JSON body but wrong Accept headers is rejected
+    ...
     [Template]    Create Customer Wrong Body Or Mimetype
     ${422}    JSON decode error    ${XML_BODY}
     ${422}    JSON decode error    ${NOT_JSON_BODY}

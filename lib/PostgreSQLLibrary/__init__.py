@@ -1,6 +1,6 @@
 from typing import Any, List, LiteralString, Tuple
 from robot.api.deco import library, keyword
-from .database import PgSQLDB
+from PostgreSQLLibrary.database import PgSQLDB
 
 
 @library(scope="GLOBAL", version="1.0.0", auto_keywords=False)
@@ -39,7 +39,7 @@ class PostgreSQLLibrary:
         self, query: LiteralString, params: list | None = None, **kwargs
     ) -> List[Tuple[Any, ...]]:
         """
-        Execute query on PostgreSQL database.
+        Execute ``query`` on PostgreSQL database.
         """
         if self._db is None:
             raise Exception("PostgreSQL database is not initialized")
@@ -52,7 +52,7 @@ class PostgreSQLLibrary:
         self, command: LiteralString, params: list | None = None, **kwargs
     ) -> None:
         """
-        Execute command on PostgreSQL database.
+        Execute ``command`` on PostgreSQL database.
         """
         if self._db is None:
             raise Exception("PostgreSQL database is not initialized")

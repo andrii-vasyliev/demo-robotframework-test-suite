@@ -14,5 +14,5 @@ Validate Customers
 
 Validate Test Data
     [Arguments]    ${scope}=${SCOPE}
-    ${result}    PG Get Customers By Ids    @{${scope}_CONTEXT.customer_ids}
-    Lists Should Be Equal    ${${scope}_CONTEXT.customer_rows}    ${result}    Customers are not as expected
+    ${result}    PG Get Customers By Ids    @{${scope.upper()}_CONTEXT.customer_ids}
+    Lists Should Be Equal    ${${scope.upper()}_CONTEXT.customer_rows}    ${result}    Customers are not as expected

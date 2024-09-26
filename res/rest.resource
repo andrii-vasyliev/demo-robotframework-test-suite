@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation       REST API basic keywords:
 ...                 - ``Combine Request Parameters``    Combines the given parameters into a query string.
-...                 - ``Do POST``    Sends a POST request on a previously created HTTP Session.
+...                 - ``Do POST``    Sends a ``POST`` request on a previously created HTTP Session.
 ...                 Refer to ``POST On Session`` documentation for the list of supported arguments.
 ...
 
@@ -22,7 +22,7 @@ Combine Request Parameters
 
 Do POST
     [Documentation]
-    ...    Sends a POST request on a previously created HTTP Session.
+    ...    Sends a ``POST`` request on a previously created HTTP Session.
     ...
     ...    Keyword is a wrapper for the ``POST On Session``.
     ...    Refer to ``POST On Session`` documentation for the list of supported arguments.

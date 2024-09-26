@@ -30,7 +30,7 @@ class GlobalContext:
             self.catalog += (Item(**i),)
 
     def get_item_by_id(self, id: int) -> Item | None:
-        """Get item by id"""
+        """Get Product Catalog item by id"""
         for item in self.catalog:
             if item.id == id:
                 return item
@@ -85,6 +85,7 @@ def get_global_context(
 ) -> GlobalContext | None:
     """
     Returns a GlobalContext object of the given type.
+
     Defaults to the "GLOBAL" type.
     Available types: "GLOBAL"
     """
@@ -98,6 +99,7 @@ def get_exec_context(
 ) -> ExecContext | None:
     """
     Returns an ExecContext object in the given scope.
+
     Defaults to the "TEST" scope.
     Available scopes: "TEST", "SUITE", "SUITES"
     """

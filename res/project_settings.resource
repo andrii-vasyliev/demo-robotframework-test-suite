@@ -9,7 +9,7 @@ Library             ApplicationLibrary
 Library             PostgreSQLLibrary
 Library             FakeItLibrary
 Resource            common.resource
-Resource            rest.robot
+Resource            rest.resource
 Resource            api_common.resource
 Resource            api_customers.resource
 Resource            api_orders.resource

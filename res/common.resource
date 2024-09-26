@@ -123,6 +123,7 @@ Set Operation Start
     ...
     [Arguments]    ${scope}=${SCOPE}
     ${result}    Pgsql Query    SELECT current_timestamp
+    Should Not Be Empty    ${result}    Unable to get timestamp from the database
     ${${scope.upper()}_CONTEXT.audit_info.timestamp.start_date}    Set Variable    ${result}[0][0]
 
 Set Operation End
@@ -137,6 +138,7 @@ Set Operation End
     ...
     [Arguments]    ${scope}=${SCOPE}
     ${result}    Pgsql Query    SELECT current_timestamp
+    Should Not Be Empty    ${result}    Unable to get timestamp from the database
     ${${scope.upper()}_CONTEXT.audit_info.timestamp.end_date}    Set Variable    ${result}[0][0]
 
 Set Operation User

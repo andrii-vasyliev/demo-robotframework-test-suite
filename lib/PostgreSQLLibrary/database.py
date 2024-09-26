@@ -23,7 +23,7 @@ class PgSQLDB:
     @contextlib.contextmanager
     def cursor(self, **kwargs) -> Generator[Cursor[Tuple[Any, ...]], Any, None]:
         """
-        Creates cursor for PostgreSQL database.
+        Gets cursor from the PostgreSQL connection pool.
         """
         if self._pool is None:
             raise Exception("Database is not initialized")
@@ -42,7 +42,7 @@ class PgSQLDB:
         self, query: LiteralString, params: list | None = None, **kwargs
     ) -> List[Tuple[Any, ...]]:
         """
-        Executes query on PostgreSQL database.
+        Executes ``query`` on PostgreSQL database.
         """
         with self.cursor(**kwargs) as cursor:
             result: List[Tuple[Any, ...]] = cursor.execute(query, params).fetchall()
@@ -53,7 +53,7 @@ class PgSQLDB:
         self, command: LiteralString, params: list | None = None, **kwargs
     ) -> None:
         """
-        Executes command on PostgreSQL database.
+        Executes ``command`` on PostgreSQL database.
         """
         with self.cursor(**kwargs) as cursor:
             cursor.execute(command, params)

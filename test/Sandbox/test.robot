@@ -44,12 +44,17 @@ PG List
 Faker
     ${name}    Fake Customer Name
     ${name}    Fake Customer Name    PL
-    ${name}    Fake Customer Name    RU
+    ${name}    Fake Customer Name    BG
     ${name}    Fake Customer Name    JP
     ${email}    Fake Customer Email    PL
-    ${email}    Fake Customer Email    RU    .
-    ${email}    Fake Customer Email    RU    ${EMPTY}
+    ${email}    Fake Customer Email    BG    .
+    ${email}    Fake Customer Email    BG    ${EMPTY}
     Log    ${{ FakeItLibrary.FakeItLibrary.fake_customer_email(FakeItLibrary.Locales.EN) }}
+    Log    ${{ FakeItLibrary.FakeItLibrary.fake_string() }}
+    Log    ${{ FakeItLibrary.FakeItLibrary.fake_string(25) }}
+    Log    ${{ FakeItLibrary.FakeItLibrary.fake_domain_name(10) }}
+    Log    ${{ FakeItLibrary.FakeItLibrary.fake_domain_name(15) }}
+    Log    ${{ FakeItLibrary.FakeItLibrary.fake_domain_name(255) }}
 
 
 *** Keywords ***
