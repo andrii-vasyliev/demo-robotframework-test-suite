@@ -6,7 +6,6 @@ Documentation       REST API basic keywords:
 ...
 
 Resource            project_settings.resource
-Variables           api_common_jsd.py
 
 
 *** Keywords ***

@@ -8,8 +8,8 @@ Library             FakerLibrary    locale=pl_PL
 Library             ApplicationLibrary
 Library             PostgreSQLLibrary
 Library             FakeItLibrary
-Resource            common.resource
 Resource            rest.resource
+Resource            common.resource
 Resource            api_common.resource
 Resource            api_customers.resource
 Resource            api_orders.resource

@@ -4,6 +4,27 @@ JSON schema definitions for the API Customers
 https://json-schema.org/understanding-json-schema/reference
 """
 
+JSD_API_HEALTH = {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "https://example.com/product.schema.json",
+    "title": "Health",
+    "description": "Health",
+    "type": "object",
+    "required": ["status", "timestamp"],
+    "additionalProperties": False,
+    "properties": {
+        "status": {
+            "description": "Status",
+            "type": "string",
+        },
+        "timestamp": {
+            "description": "Timestamp of the request",
+            "type": "string",
+            "format": "date-time",
+        },
+    },
+}
+
 JSD_API_ERROR = {
     "$schema": "https://json-schema.org/draft/2020-12/schema",
     "$id": "https://example.com/product.schema.json",

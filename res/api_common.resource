@@ -1,6 +1,8 @@
 *** Settings ***
 Documentation       REST API basic keywords:
 ...                 - ``Setup API Session``    Creates an HTTP Session for the API
+...                 - ``Check Service Health``    Queries health endpoint of the provided service.
+...                 Check is skipped if health endpoint is not configured.
 ...                 - ``Validate API Response Template``    Template for the API response validation keywords
 ...                 - ``Validate API Error Response``    Validates given API error response
 ...
@@ -23,7 +25,26 @@ Setup API Session
     Should Be True
     ...    $api and isinstance($api, dict) and $api.get('url', None)
     ...    API url is not defined or invalid for the environment "${ENV_NAME}"
+    Check Service Health    ${api}
     Create Session    API    ${api}[url]${api.get('uri', '')}    headers=${DEFAULT_API_HEADERS}
+
+Check Service Health
+    [Documentation]
+    ...    Queries health endpoint of the provided service. Check is skipped if health endpoint is not configured.
+    ...
+    ...    Parameters:
+    ...    - `api_env_dict`    service configuration dictionary as it is described in the environment configuration
+    ...
+    [Arguments]    ${api_env_dict}
+    IF    $api_env_dict.get('health', None)
+        ${status}    ${response}    Run Keyword And Ignore Error
+        ...    GET
+        ...    ${api_env_dict}[url]${api_env_dict}[health]
+        ...    headers=${DEFAULT_API_HEADERS}
+        Should Be True    $status == "PASS"    API is not accessible:\n${response}
+        Validate Json By Schema    ${response.json()}    ${JSD_API_HEALTH}
+        Should Be Equal As Strings    ${response.json()}[status]    UP    API is not ready
+    END
 
 Validate API Response Template
     [Documentation]
