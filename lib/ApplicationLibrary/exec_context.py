@@ -1,9 +1,8 @@
 from typing import Any
 from enum import StrEnum
 from robot.libraries.BuiltIn import BuiltIn
-from ApplicationLibrary.entity.customer import Customer
-from ApplicationLibrary.entity.item import Item
-from ApplicationLibrary.utils.audited import AuditInfo
+from ApplicationLibrary.entity import Customer, Item
+from ApplicationLibrary.utils import AuditInfo
 
 
 class GlobalContextType(StrEnum):

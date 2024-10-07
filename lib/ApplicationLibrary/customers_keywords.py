@@ -1,11 +1,11 @@
 from robot.api.deco import keyword
-from ApplicationLibrary.utils.audited import AuditInfo
+from ApplicationLibrary.utils import AuditInfo
 from ApplicationLibrary.exec_context import (
     ExecContextType,
     ExecContext,
     get_exec_context,
 )
-from ApplicationLibrary.entity.customer import Customer
+from ApplicationLibrary.entity import Customer
 
 
 class CustomersKeywords:

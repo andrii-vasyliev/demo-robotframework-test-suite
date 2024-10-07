@@ -1,6 +1,6 @@
 from datetime import datetime
 from robot.api.deco import keyword
-from ApplicationLibrary.utils.audited import AuditInfo
+from ApplicationLibrary.utils import AuditInfo
 from ApplicationLibrary.exec_context import (
     ExecContextType,
     GlobalContext,
@@ -8,9 +8,7 @@ from ApplicationLibrary.exec_context import (
     get_global_context,
     get_exec_context,
 )
-from ApplicationLibrary.entity.item import Item
-from ApplicationLibrary.entity.order_item import OrderItem
-from ApplicationLibrary.entity.order import Order
+from ApplicationLibrary.entity import Item, OrderItem, Order
 
 
 class OrdersKeywords:

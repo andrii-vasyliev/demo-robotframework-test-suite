@@ -1,6 +1,6 @@
 """Item entity definition"""
 
-from ApplicationLibrary.utils.audited import Audited
+from ApplicationLibrary.utils import Audited
 
 
 class Item(Audited):

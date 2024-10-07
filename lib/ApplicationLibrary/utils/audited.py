@@ -1,5 +1,5 @@
 from datetime import datetime
-from ApplicationLibrary.utils.datetime_range import DateTimeRange
+from ApplicationLibrary.utils import DateTimeRange
 
 
 class AuditInfo:

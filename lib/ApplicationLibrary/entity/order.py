@@ -1,8 +1,8 @@
 """Order entity definition"""
 
 from datetime import datetime
-from ApplicationLibrary.utils.audited import Audited
-from ApplicationLibrary.entity.order_item import OrderItem
+from ApplicationLibrary.utils import Audited
+from ApplicationLibrary.entity import OrderItem
 
 
 class Order(Audited):

@@ -46,9 +46,11 @@ Project Teardown
     [Documentation]
     ...    Performs basic project teardown:
     ...    - closes PostgreSQL connection
+    ...    - removes all HTTP sessions
     ...    - disposes global context object
     ...
     Pgsql Close
+    Delete All Sessions
     Dispose Global Context
 
 Basic Suites Setup
