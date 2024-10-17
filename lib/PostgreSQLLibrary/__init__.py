@@ -49,7 +49,6 @@ def get_cursor(**kwargs) -> Generator[Cursor[Tuple[Any]], Any, None]:
     """
     Gets cursor from the PostgreSQL connection pool.
     """
-    global __pool
     if __pool is None:
         raise Exception("PostgreSQL database is not initialized")
 
