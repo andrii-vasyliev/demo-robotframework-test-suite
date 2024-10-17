@@ -8,4 +8,4 @@ API: dict[str, str] = {
     "health": "/health",
 }
 
-DATABASE_URL: str = "postgresql://robotfw:password@127.0.0.1:5432/ecommerce"
+DATABASE_URL: str = "postgresql://robotfw:password@nas.home.arpa:5432/ecommerce"

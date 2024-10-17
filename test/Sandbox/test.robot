@@ -49,12 +49,12 @@ Faker
     ${email}    Fake Customer Email    PL
     ${email}    Fake Customer Email    BG    .
     ${email}    Fake Customer Email    BG    ${EMPTY}
-    Log    ${{ FakeItLibrary.FakeItLibrary.fake_customer_email(FakeItLibrary.Locales.EN) }}
-    Log    ${{ FakeItLibrary.FakeItLibrary.fake_string() }}
-    Log    ${{ FakeItLibrary.FakeItLibrary.fake_string(25) }}
-    Log    ${{ FakeItLibrary.FakeItLibrary.fake_domain_name(10) }}
-    Log    ${{ FakeItLibrary.FakeItLibrary.fake_domain_name(15) }}
-    Log    ${{ FakeItLibrary.FakeItLibrary.fake_domain_name(255) }}
+    Log    ${{ FakeItLibrary.fake_customer_email(FakeItLibrary.Locales.EN) }}
+    Log    ${{ FakeItLibrary.fake_string() }}
+    Log    ${{ FakeItLibrary.fake_string(25) }}
+    Log    ${{ FakeItLibrary.fake_domain_name(10) }}
+    Log    ${{ FakeItLibrary.fake_domain_name(15) }}
+    Log    ${{ FakeItLibrary.fake_domain_name(255) }}
 
 
 *** Keywords ***

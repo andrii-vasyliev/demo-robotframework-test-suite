@@ -80,11 +80,11 @@ Create customer email validation
     ${422}    is not a valid email address    name=Local Part Is Too Long
     ...    email=65_characters_user_name_is_not_allowed_abcdefghijklmnopqrstuvwxyz@a.eu
     ${422}    is not a valid email address    name=Domain Part Is Too Long
-    ...    email=a@${{ FakeItLibrary.FakeItLibrary.fake_domain_name(253) }}
+    ...    email=a@${{ FakeItLibrary.fake_domain_name(253) }}
     ${422}    is not a valid email address    name=Email Is Too Long
-    ...    email=${{ FakeItLibrary.FakeItLibrary.fake_string(64) }}@${{ FakeItLibrary.FakeItLibrary.fake_domain_name(190) }}
+    ...    email=${{ FakeItLibrary.fake_string(64) }}@${{ FakeItLibrary.fake_domain_name(190) }}
     ${422}    is not a valid email address    name=Email With Angle Brakets Is Too Long
-    ...    email=<${{ FakeItLibrary.FakeItLibrary.fake_string(64) }}@${{ FakeItLibrary.FakeItLibrary.fake_domain_name(190) }}>
+    ...    email=<${{ FakeItLibrary.fake_string(64) }}@${{ FakeItLibrary.fake_domain_name(190) }}>
     # Default pydantic validaion does not allow exotic emails
     ${422}    is not a valid email address    name=Semi-valid I    email="a-z${SPACE}A-Z"@email.eu
     ${422}    is not a valid email address    name=Semi-valid II    email=".a-z.A-Z"@email.eu

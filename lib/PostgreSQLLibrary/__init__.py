@@ -1,60 +1,86 @@
-from typing import Any, List, LiteralString, Tuple
-from robot.api.deco import library, keyword
-from PostgreSQLLibrary.database import PgSQLDB
+"""
+Library provides an interface for accessing PostgreSQL database.
+"""
+
+from contextlib import contextmanager
+from typing import List, Any, LiteralString, Tuple, Generator
+from psycopg.cursor import Cursor
+from psycopg_pool import ConnectionPool
+from robot.api.deco import keyword
 
 
-@library(scope="GLOBAL", version="1.0.0", auto_keywords=False)
-class PostgreSQLLibrary:
+ROBOT_LIBRARY_SCOPE = "GLOBAL"
+ROBOT_LIBRARY_VERSION = "1.0.0"
+ROBOT_AUTO_KEYWORDS = False
+
+__pool: ConnectionPool | None = None
+
+
+@keyword()
+def pgsql_connect(uri: str) -> None:
     """
-    Library provides an interface for accessing PostgreSQL database.
+    Connects to PostgreSQL database.
     """
+    global __pool
+    if __pool is not None:
+        raise Exception("PostgreSQL database is already initialized")
 
-    def __init__(self) -> None:
-        self._db: PgSQLDB | None = None
+    try:
+        __pool = ConnectionPool(uri)
+    except Exception:
+        raise Exception("PostgreSQL database connection failed")
 
-    @keyword()
-    def pgsql_connect(self, url: str) -> None:
-        """
-        Connect to PostgreSQL database.
-        """
-        if self._db is not None:
-            raise Exception("PostgreSQL database is already initialized")
 
-        self._db = PgSQLDB()
-        self._db.connect(url)
+@keyword()
+def pgsql_close() -> None:
+    """
+    Disconnects from PostgreSQL database.
+    """
+    global __pool
+    if __pool is None:
+        raise Exception("PostgreSQL database is not initialized")
 
-    @keyword()
-    def pgsql_close(self) -> None:
-        """
-        Disconnect from PostgreSQL database.
-        """
-        if self._db is None:
-            raise Exception("PostgreSQL database is not initialized")
+    __pool.close()
+    __pool = None
 
-        self._db.disconnect()
-        self._db = None
 
-    @keyword()
-    def pgsql_query(
-        self, query: LiteralString, params: list | None = None, **kwargs
-    ) -> List[Tuple[Any, ...]]:
-        """
-        Execute ``query`` on PostgreSQL database.
-        """
-        if self._db is None:
-            raise Exception("PostgreSQL database is not initialized")
+@contextmanager
+def get_cursor(**kwargs) -> Generator[Cursor[Tuple[Any]], Any, None]:
+    """
+    Gets cursor from the PostgreSQL connection pool.
+    """
+    global __pool
+    if __pool is None:
+        raise Exception("PostgreSQL database is not initialized")
 
-        result: List[Tuple[Any, ...]] = self._db.query(query, params, **kwargs)
-        return result
+    with __pool.connection() as connection:
+        with connection.cursor(**kwargs) as cursor:
+            try:
+                yield cursor
+            except Exception:
+                connection.rollback()
+                raise
+            else:
+                connection.commit()
 
-    @keyword()
-    def pgsql_execute(
-        self, command: LiteralString, params: list | None = None, **kwargs
-    ) -> None:
-        """
-        Execute ``command`` on PostgreSQL database.
-        """
-        if self._db is None:
-            raise Exception("PostgreSQL database is not initialized")
 
-        self._db.execute(command, params, **kwargs)
+@keyword()
+def pgsql_query(
+    query: LiteralString, params: list | None = None, **kwargs
+) -> List[Tuple[Any, ...]]:
+    """
+    Executes ``query`` with ``params`` on PostgreSQL database and returns result.
+    """
+    with get_cursor(**kwargs) as cursor:
+        result: List[Tuple[Any, ...]] = cursor.execute(query, params).fetchall()
+
+    return result
+
+
+@keyword()
+def pgsql_execute(command: LiteralString, params: list | None = None, **kwargs) -> None:
+    """
+    Executes ``command`` with ``params`` on PostgreSQL database.
+    """
+    with get_cursor(**kwargs) as cursor:
+        cursor.execute(command, params)
