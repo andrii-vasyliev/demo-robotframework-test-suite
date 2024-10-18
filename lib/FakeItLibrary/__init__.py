@@ -18,7 +18,7 @@ class Locales(StrEnum):
     BG = "bg_BG"
 
 
-fake = Faker([locale.value for locale in Locales])
+fake = Faker([locale.value for locale in Locales], use_weighting=False)
 
 
 @keyword
@@ -54,13 +54,17 @@ def fake_customer_email(
         user = user.replace(" ", replace_spaces_with).replace("..", ".")
 
     if locale == Locales.PL:
-        domain: str = fake.random_element(["łódż.cą", "dąbie.kraków.pl"])
+        domain: str = fake.random_element(
+            [fake[locale].safe_domain_name(), "łódż.cą", "dąbie.kraków.org.pl"]
+        )
     elif locale == Locales.EN:
-        domain = fake.random_element(["gmail.com", "outlook.com"])
+        domain = fake[locale].safe_domain_name()
     elif locale == Locales.JP:
-        domain = fake.random_element(["org.jp", "net.jp"])
+        domain = fake[locale].safe_domain_name()
     elif locale == Locales.BG:
-        domain = fake.random_element(["поща.бг", "внимание.деца"])
+        domain = fake.random_element(
+            [fake[locale].safe_domain_name(), "поща.бг", "внимание.деца"]
+        )
     else:
         raise ValueError(f"Unsupported locale: {locale}")
 

@@ -4,7 +4,6 @@ Documentation       Project settings
 Library             Collections
 Library             JSONLibrary
 Library             RequestsLibrary
-Library             FakerLibrary    locale=pl_PL
 Library             ApplicationLibrary
 Library             PostgreSQLLibrary
 Library             FakeItLibrary

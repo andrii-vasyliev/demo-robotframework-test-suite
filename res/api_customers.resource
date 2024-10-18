@@ -41,7 +41,7 @@ API Create Customer
 
 Populate Customer Name
     [Documentation]
-    ...    Adds ``FakerLibrary.Name`` to the Create Customer request body
+    ...    Adds name to the Create Customer request body
     ...
     ...    Parameters:
     ...    - ``body``    request body as a dictionary
@@ -49,16 +49,16 @@ Populate Customer Name
     ...
     ...    The ``name`` is processed as follows:
     ...    - when ``name`` is ``None`` it is not added to the ``body``
-    ...    - when ``name`` is ``EMPTY`` a ``FakerLibrary.Name`` is added to the ``body``
+    ...    - when ``name`` is ``EMPTY`` a ``FakeItLibrary.Fake Customer Name`` is added to the ``body``
     ...    - otherwise given ``name`` is added to the ``body``
     ...
     ...    Returns:
-    ...    - resulting request ``body``
-    ...    - resulting ``name``
+    ...    - request ``body`` (changes given ``body`` dictionary)
+    ...    - ``name``
     ...
     [Arguments]    ${body}    ${name}
     IF    $name == ""
-        ${name}    Name
+        ${name}    Fake Customer Name
     END
     IF    $name
         ${body}[name]    Set Variable    ${name}
@@ -67,7 +67,7 @@ Populate Customer Name
 
 Populate Customer Email
     [Documentation]
-    ...    Adds ``FakerLibrary.Email`` to the Create Customer request body
+    ...    Adds email to the Create Customer request body
     ...
     ...    Parameters:
     ...    - ``body``    request body as a dictionary
@@ -75,16 +75,16 @@ Populate Customer Email
     ...
     ...    The ``email`` is processed as follows:
     ...    - when ``email`` is ``None`` it is not added to the ``body``
-    ...    - when ``email`` is ``EMPTY`` a ``FakerLibrary.Email`` is added to the ``body``
+    ...    - when ``email`` is ``EMPTY`` a ``FakeItLibrary.Fake Customer Email`` is added to the ``body``
     ...    - otherwise given ``email`` is added to the ``body``
     ...
     ...    Returns:
-    ...    - resulting request ``body``
-    ...    - resulting ``email``
+    ...    - request ``body`` (changes given ``body`` dictionary)
+    ...    - ``email``
     ...
     [Arguments]    ${body}    ${email}
     IF    $email == ""
-        ${email}    Email
+        ${email}    Fake Customer Email
     END
     IF    $email
         ${body}[email]    Set Variable    ${email}
