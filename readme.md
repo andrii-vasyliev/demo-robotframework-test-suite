@@ -102,12 +102,16 @@ Project consists of following folders:
 
 ## Docker
 
-1. Build an image:
+1. Navigate to the project directory:
+
+    `cd demo-robotframework-test-suite`
+
+2. Build an image:
 
     `docker build --tag demo--robot-testsuite .`
 
-2. Run container:
+3. Run container:
 
     `docker run -i -t --rm -v /path/to/demo-robotframework-test-suite:/robot demo--robot-testsuite`
 
-3. Check test execution results in the `log/log.html` and/or `log/report.html`
+4. Check test execution results in the `log/log.html` and/or `log/report.html`
