@@ -7,6 +7,7 @@
   - [Installation](#installation)
   - [Project structure](#project-structure)
   - [Usage](#usage)
+  - [Docker](#docker)
 
 
 
@@ -97,4 +98,16 @@ Project consists of following folders:
 
     or use Microsoft Visual Studio Code to run individual test cases or suites from Editor or Testing view
 
-4. Check test execution results `log/log.html`and/or `log/report.html`
+4. Check test execution results in the `log/log.html` and/or `log/report.html`
+
+## Docker
+
+1. Build an image:
+
+    `docker build --tag demo--robot-testsuite .`
+
+2. Run container:
+
+    `docker run -i -t --rm -v /path/to/demo-robotframework-test-suite:/robot demo--robot-testsuite`
+
+3. Check test execution results in the `log/log.html` and/or `log/report.html`

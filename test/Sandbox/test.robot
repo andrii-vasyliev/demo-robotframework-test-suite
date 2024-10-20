@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation       Sandbox for approaches testing and proof of concept
 
-Resource            ../res/project_settings.resource
+Resource            ../../res/project_settings.resource
 
 Suite Setup         Setup Suite
 Suite Teardown      Basic Suite Teardown
