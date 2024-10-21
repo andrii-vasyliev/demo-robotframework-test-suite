@@ -37,7 +37,7 @@ Project Setup
     ...    Global context is available globally in every suite or test case
     ...
     Pgsql Connect    ${DATABASE_URL}
-    ${catalog}    Pgsql Query    SELECT ecommerce.rf_get_items()
+    ${catalog}    Pgsql Query    SELECT robotfw.get_catalog_items()
     ${catalog}    Evaluate    tuple(i[0] for i in $catalog)
     ${${GLOBAL}_CONTEXT}    Define Global Context    ${catalog}
     VAR    ${${GLOBAL}_CONTEXT}    ${${GLOBAL}_CONTEXT}    scope=${GLOBAL}
