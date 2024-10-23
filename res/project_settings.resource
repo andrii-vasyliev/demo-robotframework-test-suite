@@ -5,7 +5,7 @@ Library             Collections
 Library             JSONLibrary
 Library             RequestsLibrary
 Library             ApplicationLibrary
-Library             PostgreSQLLibrary
+Library             DatabaseLibrary
 Library             FakeItLibrary
 Resource            rest.resource
 Resource            common.resource

@@ -1,5 +1,5 @@
 """
-Library provides an interface for accessing PostgreSQL database.
+PostgreSQL database library
 """
 
 from contextlib import contextmanager
@@ -7,11 +7,6 @@ from typing import List, Any, LiteralString, Tuple, Generator
 from psycopg.cursor import Cursor
 from psycopg_pool import ConnectionPool
 from robot.api.deco import keyword
-
-
-ROBOT_LIBRARY_SCOPE = "GLOBAL"
-ROBOT_LIBRARY_VERSION = "1.0.0"
-ROBOT_AUTO_KEYWORDS = False
 
 __pool: ConnectionPool | None = None
 
