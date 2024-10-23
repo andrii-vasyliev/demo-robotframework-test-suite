@@ -2,8 +2,8 @@
 Documentation
 ...                 API Customers keywords:
 ...                 - ``API Create Customer``    Creates customer using API Create Customer
-...                 - ``Populate Customer Name``    Adds ``FakerLibrary.Name`` to the Create Customer request body
-...                 - ``Populate Customer Email``    Adds ``FakerLibrary.Email`` to the Create Customer request body
+...                 - ``Populate Customer Name``    Adds ``FakeItLibrary.Fake Customer Name`` to the Create Customer request body
+...                 - ``Populate Customer Email``    Adds ``FakeItLibrary.Fake Customer Email`` to the Create Customer request body
 ...                 - ``Validate Create Customer Success Response``    Validates given successful API Create Customer response
 ...                 - ``Validate Get Customer Success Response``    Validates given successful API Get Customer response
 ...                 - ``Validate Get Customers Success Response``    Validates given successful API Get Customers response
@@ -25,7 +25,7 @@ API Create Customer
     ...
     ...    The ``parameters`` are processed as follows:
     ...    - when ``parameter`` is ``None`` it is not populated
-    ...    - when ``parameter`` is ``EMPTY`` a ``FakerLibrary`` is used to populate the value
+    ...    - when ``parameter`` is ``EMPTY`` a ``FakeItLibrary`` is used to populate the value
     ...    - otherwise given ``parameter`` is populated
     ...
     [Arguments]    ${name}=${EMPTY}    ${email}=${EMPTY}    ${scope}=${SCOPE}
