@@ -41,8 +41,29 @@ Check Service Health
         ...    ${svc_conf}[url]${svc_conf}[health]
         ...    headers=${DEFAULT_API_HEADERS}
         Should Be True    $status == "PASS"    Service is not accessible:\n${response}
-        Validate Json By Schema    ${response.json()}    ${JSD_API_HEALTH}
+        Validate API Response Template    ${response}    ${JSD_API_HEALTH}
         Should Be Equal As Strings    ${response.json()}[status]    UP    Service is not ready
+    END
+
+Check Service Availability
+    [Documentation]
+    ...    Queries ping endpoint of the provided service. Check is skipped if ping endpoint is not configured.
+    ...
+    ...    Parameters:
+    ...    - `svc_conf`    service configuration dictionary as it is described in the environment configuration
+    ...
+    [Arguments]    ${svc_conf}
+    IF    $svc_conf.get('ping', None)
+        ${status}    ${response}    Run Keyword And Ignore Error
+        ...    GET
+        ...    ${svc_conf}[url]${svc_conf}[ping]
+        ...    headers=${DEFAULT_API_HEADERS}
+        Should Be True    $status == "PASS"    Service is not accessible:\n${response}
+        Should Be Equal As Integers
+        ...    ${response.status_code}
+        ...    ${204}
+        ...    HTTP status code "${response.status_code}" received when "${204}" is expected
+        Should Be Empty    ${response.text}    Unexpected response body returned:\n${response.text}
     END
 
 Validate API Response Template

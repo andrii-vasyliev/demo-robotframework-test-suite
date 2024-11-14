@@ -57,6 +57,9 @@ Faker
     Log    ${{ FakeItLibrary.fake_domain_name(255) }}
 
 
+Pimg
+    Check Service Availability    ${API}
+
 *** Keywords ***
 Setup Suite
     Basic Suite Setup
