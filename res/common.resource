@@ -60,7 +60,7 @@ Basic Suites Setup
     ...
     ...    Suites context is available in current suite, its sub-suites and test cases
     ...
-    ${${SUITES}_CONTEXT}    Define Suite Context
+    ${${SUITES}_CONTEXT}    Define Exec Context
     VAR    ${${SUITES}_CONTEXT}    ${${SUITES}_CONTEXT}    scope=${SUITES}
     VAR    ${SCOPE}    ${SUITES}    scope=${SUITES}
 
@@ -69,7 +69,7 @@ Basic Suites Teardown
     ...    Performs basic suites teardown:
     ...    - disposes suites execution context
     ...
-    Dispose Suite Context
+    Dispose Exec Context
     VAR    ${SCOPE}    ${None}    scope=${SUITES}
     VAR    ${${SUITES}_CONTEXT}    ${None}    scope=${SUITES}
 
@@ -80,7 +80,7 @@ Basic Suite Setup
     ...
     ...    Suite context is available only in current suite
     ...
-    ${${SUITE}_CONTEXT}    Define Suite Context
+    ${${SUITE}_CONTEXT}    Define Exec Context
     VAR    ${${SUITE}_CONTEXT}    ${${SUITE}_CONTEXT}    scope=${SUITE}
     VAR    ${SCOPE}    ${SUITE}    scope=${SUITE}
 
@@ -89,7 +89,7 @@ Basic Suite Teardown
     ...    Performs basic suite teardown:
     ...    - disposes suite execution context
     ...
-    Dispose Suite Context
+    Dispose Exec Context
     VAR    ${SCOPE}    ${None}    scope=${SUITE}
     VAR    ${${SUITE}_CONTEXT}    ${None}    scope=${SUITE}
 
@@ -100,7 +100,7 @@ Basic Test Setup
     ...
     ...    Test context is available only in current test case
     ...
-    ${${TEST}_CONTEXT}    Define Test Context
+    ${${TEST}_CONTEXT}    Define Exec Context
     VAR    ${${TEST}_CONTEXT}    ${${TEST}_CONTEXT}    scope=${TEST}
     VAR    ${SCOPE}    ${TEST}    scope=${TEST}
 
@@ -109,7 +109,7 @@ Basic Test Teardown
     ...    Performs basic test case teardown:
     ...    - disposes test execution context
     ...
-    Dispose Test Context
+    Dispose Exec Context
     VAR    ${SCOPE}    ${None}    scope=${TEST}
     VAR    ${${TEST}_CONTEXT}    ${None}    scope=${TEST}
 

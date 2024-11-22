@@ -22,7 +22,7 @@ class ExecContextType(StrEnum):
 class GlobalContext:
     """Base class for the global context"""
 
-    def __init__(self, items: list[dict] | None):
+    def __init__(self, items: list[dict] | None = None):
         self.catalog: tuple = tuple()
 
         for i in items if items else []:

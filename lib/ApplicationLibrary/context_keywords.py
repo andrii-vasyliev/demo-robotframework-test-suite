@@ -19,24 +19,12 @@ class ContextKeywords:
 
     @staticmethod
     @keyword
-    def define_suite_context() -> ExecContext:
-        """Creates suite execution context object"""
+    def define_exec_context() -> ExecContext:
+        """Creates execution context object"""
         return ExecContext()
 
     @staticmethod
     @keyword
-    def dispose_suite_context() -> None:
-        """Disposes suite execution context object"""
-        pass
-
-    @staticmethod
-    @keyword
-    def define_test_context() -> ExecContext:
-        """Creates test execution context object"""
-        return ExecContext()
-
-    @staticmethod
-    @keyword
-    def dispose_test_context() -> None:
-        """Disposes test execution context object"""
+    def dispose_exec_context() -> None:
+        """Disposes execution context object"""
         pass
