@@ -54,14 +54,29 @@ JSD_API_ERROR = {
                     "type": "array",
                     "minItems": 1,
                     "uniqueItems": True,
-                    "items": {"type": ["string", "integer"]},
+                    "items": {
+                        "type": [
+                            "string",
+                            "integer",
+                        ]
+                    },
                 },
                 "input": {
                     "description": "Input value",
-                    "oneOf": [{"type": "object"}, {"type": "string"}, {"type": "null"}],
+                    "oneOf": [
+                        {"type": "object"},
+                        {"type": "string"},
+                        {"type": "null"},
+                    ],
                 },
-                "msg": {"description": "Error message", "type": "string"},
-                "type": {"description": "Error type", "type": "string"},
+                "msg": {
+                    "description": "Error message",
+                    "type": "string",
+                },
+                "type": {
+                    "description": "Error type",
+                    "type": "string",
+                },
                 "url": {
                     "description": "Documentation URL for the validation error",
                     "type": "string",

@@ -13,11 +13,26 @@ JSD_CREATE_CUSTOMER_SUCCESS = {
     "required": ["id", "name", "email"],
     "additionalProperties": False,
     "properties": {
-        "id": {"description": "Unique Customer ID", "type": "string", "format": "uuid"},
-        "name": {"description": "Customer Name", "type": "string"},
+        "id": {
+            "description": "Unique Customer ID",
+            "type": "string",
+            "format": "uuid",
+        },
+        "name": {
+            "description": "Customer Name",
+            "type": "string",
+        },
         "email": {
             "description": "Customer Email",
-            "oneOf": [{"type": "string", "format": "email"}, {"type": "null"}],
+            "oneOf": [
+                {
+                    "type": "string",
+                    "format": "email",
+                },
+                {
+                    "type": "null",
+                },
+            ],
         },
     },
 }
@@ -50,10 +65,21 @@ JSD_GET_CUSTOMERS_SUCCESS = {
                     "type": "string",
                     "format": "uuid",
                 },
-                "name": {"description": "Customer Name", "type": "string"},
+                "name": {
+                    "description": "Customer Name",
+                    "type": "string",
+                },
                 "email": {
                     "description": "Customer Email",
-                    "oneOf": [{"type": "string", "format": "email"}, {"type": "null"}],
+                    "oneOf": [
+                        {
+                            "type": "string",
+                            "format": "email",
+                        },
+                        {
+                            "type": "null",
+                        },
+                    ],
                 },
             },
         }

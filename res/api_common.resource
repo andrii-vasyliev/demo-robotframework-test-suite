@@ -3,6 +3,8 @@ Documentation       REST API basic keywords:
 ...                 - ``Setup API Session``    Creates an HTTP Session for the API
 ...                 - ``Check Service Health``    Queries health endpoint of the provided service.
 ...                 Check is skipped if health endpoint is not configured.
+...                 - ``Check Service Availability``    Queries ping endpoint of the provided service.
+...                 Check is skipped if ping endpoint is not configured.
 ...                 - ``Validate API Response Template``    Template for the API response validation keywords
 ...                 - ``Validate API Error Response``    Validates given API error response
 ...
@@ -32,7 +34,7 @@ Check Service Health
     ...    Queries health endpoint of the provided service. Check is skipped if health endpoint is not configured.
     ...
     ...    Parameters:
-    ...    - `svc_conf`    service configuration dictionary as it is described in the environment configuration
+    ...    - ``svc_conf``    service configuration dictionary as it is described in the environment configuration
     ...
     [Arguments]    ${svc_conf}
     IF    $svc_conf.get('health', None)
@@ -50,7 +52,7 @@ Check Service Availability
     ...    Queries ping endpoint of the provided service. Check is skipped if ping endpoint is not configured.
     ...
     ...    Parameters:
-    ...    - `svc_conf`    service configuration dictionary as it is described in the environment configuration
+    ...    - ``svc_conf``    service configuration dictionary as it is described in the environment configuration
     ...
     [Arguments]    ${svc_conf}
     IF    $svc_conf.get('ping', None)
