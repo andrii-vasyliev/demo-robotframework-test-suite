@@ -1,6 +1,7 @@
 *** Settings ***
 Documentation
-...                 PosgreSQL API Customers keywords
+...                 PosgreSQL API Customers keywords:
+...                 - ``PG Get Customers By Ids``    Gets customers from the PostgreSQL DB by Ids
 ...
 
 Resource            project_settings.resource

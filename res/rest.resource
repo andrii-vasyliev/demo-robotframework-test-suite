@@ -13,6 +13,9 @@ Combine Request Parameters
     [Documentation]
     ...    Combines the given parameters into a query string.
     ...
+    ...    Parameters:
+    ...    - ``&args``    named arguments that represent query parameters key=value pairs
+    ...
     [Arguments]    &{args}
     ${params}    Evaluate
     ...    urllib.parse.urlencode({k: v for k, v in $args.items() if v is not None})
