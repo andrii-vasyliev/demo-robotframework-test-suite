@@ -45,20 +45,21 @@ def fake_customer_email(
     else:
         user = user.replace(" ", replace_spaces_with).replace("..", ".")
 
-    if locale == Locales.PL:
-        domain: str = __fake.random_element(
-            [__fake[locale].safe_domain_name(), "łódż.cą", "dąbie.kraków.org.pl"]
-        )
-    elif locale == Locales.EN:
-        domain = __fake[locale].safe_domain_name()
-    elif locale == Locales.JP:
-        domain = __fake[locale].safe_domain_name()
-    elif locale == Locales.BG:
-        domain = __fake.random_element(
-            [__fake[locale].safe_domain_name(), "поща.бг", "внимание.деца"]
-        )
-    else:
-        raise ValueError(f"Unsupported locale: {locale}")
+    match locale:
+        case Locales.PL:
+            domain: str = __fake.random_element(
+                [__fake[locale].safe_domain_name(), "łódż.cą", "dąbie.kraków.org.pl"]
+            )
+        case Locales.EN:
+            domain = __fake[locale].safe_domain_name()
+        case Locales.JP:
+            domain = __fake[locale].safe_domain_name()
+        case Locales.BG:
+            domain = __fake.random_element(
+                [__fake[locale].safe_domain_name(), "поща.бг", "внимание.деца"]
+            )
+        case _:
+            raise ValueError(f"Unsupported locale: {locale}")
 
     return user + "@" + domain
 
