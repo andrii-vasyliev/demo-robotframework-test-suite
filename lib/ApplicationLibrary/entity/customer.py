@@ -20,10 +20,9 @@ class Customer(Audited):
     @name.setter
     def name(self, name: str) -> None:
         """Sets customer name"""
-        if name and name.strip():
-            self._name: str | None = name.strip()
-        else:
-            self._name = None
+        self._name: str | None = (
+            customer_name if name and (customer_name := name.strip()) else None
+        )
 
     @property
     def email(self) -> str | None:
@@ -33,8 +32,7 @@ class Customer(Audited):
     @email.setter
     def email(self, email: str | None) -> None:
         """Sets customer email"""
-        customer_email: str | None = email.strip() if email else email
-        if customer_email:
+        if email and (customer_email := email.strip()):
             at_pos: int = customer_email.find("@")
             self._email: str | None = (
                 customer_email[: at_pos + 1] + customer_email[at_pos + 1 :].lower()

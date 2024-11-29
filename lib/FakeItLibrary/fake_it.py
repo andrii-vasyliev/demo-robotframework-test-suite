@@ -10,11 +10,13 @@ class Locales(StrEnum):
     BG = "bg_BG"
 
 
+DEFAULT_LOCALE = Locales.PL
+
 __fake = Faker([locale.value for locale in Locales], use_weighting=False)
 
 
 @keyword
-def fake_customer_name(locale: Locales = Locales.PL) -> str:
+def fake_customer_name(locale: Locales = DEFAULT_LOCALE) -> str:
     """
     Creates fake customer name based on ``locale``
 
@@ -27,7 +29,7 @@ def fake_customer_name(locale: Locales = Locales.PL) -> str:
 
 @keyword
 def fake_customer_email(
-    locale: Locales = Locales.PL, replace_spaces_with: str | None = ""
+    locale: Locales = DEFAULT_LOCALE, replace_spaces_with: str | None = ""
 ) -> str:
     """
     Creates fake customer email based on ``locale``
