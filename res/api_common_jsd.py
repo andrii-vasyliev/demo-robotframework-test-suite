@@ -64,6 +64,7 @@ JSD_API_ERROR = {
                 "input": {
                     "description": "Input value",
                     "oneOf": [
+                        {"type": "array"},
                         {"type": "object"},
                         {"type": "string"},
                         {"type": "null"},

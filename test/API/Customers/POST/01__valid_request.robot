@@ -12,6 +12,25 @@ Test Setup          Basic Test Setup
 Test Teardown       Basic Test Teardown
 
 
+*** Variables ***
+${DUPLICATE_NAME}                   {"name": "${{ FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.EN) }}",
+...                                 "email": "${{ FakeItLibrary.fake_customer_email(FakeItLibrary.Locales.EN) }}",
+...                                 "name": "${{ FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.EN) }}"}
+${DUPLICATE_EMAIL}                  {"email": "${{ FakeItLibrary.fake_customer_email(FakeItLibrary.Locales.EN) }}",
+...                                 "name": "${{ FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.EN) }}",
+...                                 "email": "${{ FakeItLibrary.fake_customer_email(FakeItLibrary.Locales.EN) }}"}
+${DUPLICATE_NAME_EMAIL}             {"email": "${{ FakeItLibrary.fake_customer_email(FakeItLibrary.Locales.EN) }}",
+...                                 "name": "${{ FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.EN) }}",
+...                                 "name": "${{ FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.EN) }}",
+...                                 "email": "${{ FakeItLibrary.fake_customer_email(FakeItLibrary.Locales.EN) }}"}
+${DUPLICATE_NAME_FIRST_INVALID}     {"name": "${EMPTY}",
+...                                 "email": "${{ FakeItLibrary.fake_customer_email(FakeItLibrary.Locales.EN) }}",
+...                                 "name": "${{ FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.EN) }}"}
+${DUPLICATE_EMAIL_FIRST_INVALID}    {"email": "(),:;<>[\]@com.pl",
+...                                 "name": "${{ FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.EN) }}",
+...                                 "email": "${{ FakeItLibrary.fake_customer_email(FakeItLibrary.Locales.EN) }}"}
+
+
 *** Test Cases ***
 Create customer with valid name and no email
     [Documentation]    Create customer with valid name and no email.
@@ -104,6 +123,22 @@ Create customer customer uniqueness
     name=${name1}
     name=${name1}    email=${email2}
     name=${name2}    email=${email1}
+
+Create customer with duplicate keys in JSON body
+    [Documentation]    Create customer with JSON that has duplicate keys:
+    ...
+    ...    - name is duplicated in the JSON body
+    ...    - email is duplicated in the JSON body
+    ...    - name and email are duplicated in the JSON body
+    ...    - name is duplicated in the JSON body, first name value is invalid
+    ...    - email is duplicated in the JSON body, first email value is invalid
+    ...
+    [Template]    Create Customer With Duplicate Keys Valid Request
+    ${DUPLICATE_NAME}
+    ${DUPLICATE_EMAIL}
+    ${DUPLICATE_NAME_EMAIL}
+    ${DUPLICATE_NAME_FIRST_INVALID}
+    ${DUPLICATE_EMAIL_FIRST_INVALID}
 
 
 *** Keywords ***

@@ -33,6 +33,34 @@ Create Customer Valid Request
     Dictionaries Should Be Equal    ${c.json}    ${response.json()}    API response is not as expected
     Validate Customers    ${c}
 
+Create Customer With Duplicate Keys Valid Request
+    [Documentation]
+    ...    Sends POST request to API Customers that is expected to be valid.
+    ...
+    ...    Validates received response:
+    ...    - response headers content type
+    ...    - response status code
+    ...    - response body schema
+    ...    - response body content against expected entity
+    ...
+    ...    Parameters:
+    ...    - ``json_string``    json string that represents the Create Customer body
+    ...
+    [Arguments]    ${json_string}
+    Set Operation User
+    Set Operation Start
+    ${response}    Do POST    API    customers/    ${json_string}
+    Set Operation End
+    Validate Create Customer Success Response    ${response}
+    ${json_object}    Convert String To Json    ${json_string}
+    ${c}    Define Customer
+    ...    ${response.json()}[id]
+    ...    ${json_object.get('name', None)}
+    ...    ${json_object.get('email', None)}
+    ...    scope=${SCOPE}
+    Dictionaries Should Be Equal    ${c.json}    ${response.json()}    API response is not as expected
+    Validate Customers    ${c}
+
 Get Customer By Id Valid Request
     [Documentation]
     ...    Send GET request to API Customers to get particular customer by Id.
@@ -94,6 +122,26 @@ Create Customer Invalid Request
     [Arguments]    ${expected_status}    ${msg}    &{args}
     ${body}    Create Dictionary    &{args}
     ${response}    Do POST    API    customers/    ${body}    expected_status=any
+    Validate API Error Response    ${response}    ${expected_status}
+    Should Contain    ${response.json()}[detail][0][msg]    ${msg}    Incorrect Create Customer error message
+
+Create Customer With Duplicate Keys Invalid Request
+    [Documentation]
+    ...    Sends POST request to API Customers that is expected to be invalid.
+    ...
+    ...    Validates received response:
+    ...    - response headers content type
+    ...    - response status code
+    ...    - response body schema
+    ...    - response body content against expected error
+    ...
+    ...    Parameters:
+    ...    - ``expected_status``    expected response HTTP status code
+    ...    - ``msg``    expected error message
+    ...    - ``json_string``    json string that represents the Create Customer body
+    ...
+    [Arguments]    ${expected_status}    ${msg}    ${json_string}
+    ${response}    Do POST    API    customers/    ${json_string}    expected_status=any
     Validate API Error Response    ${response}    ${expected_status}
     Should Contain    ${response.json()}[detail][0][msg]    ${msg}    Incorrect Create Customer error message
 

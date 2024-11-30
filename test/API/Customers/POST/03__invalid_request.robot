@@ -13,6 +13,8 @@ Test Teardown       Basic Test Teardown
 *** Variables ***
 ${XML_BODY}                 <?xml version="1.0" encoding="UTF-8"?><name>John Smith</name><email>j@s.com</email>
 ${NOT_JSON_BODY}            {"name": "John Wick" "email": "john_wick@bang-bang.laundry"}
+${JSON_LIST}                {"customers": [{"name": "Jason Statham", "email": "dad.jokes@best.memes"},
+...                         {"name": "Agent Smith", "email": "elrond@rivendell.me"}]}
 &{WRONG_JSON_BODY}          itemid=123456    quantity=1
 &{JSON_BODY_EXTRA}          name=John Wick    email=john_wick@bang-bang.laundry    id=123456
 &{JSON_BODY}                name=John Wick    email=john_wick@bang-bang.laundry
@@ -39,6 +41,7 @@ Create Customer with a wrong body or MIME type
     ${422}    JSON decode error    ${NOT_JSON_BODY}
     ${422}    Field required    ${None}
     ${422}    Field required    ${EMPTY}
+    ${422}    Field required    ${JSON_LIST}
     ${422}    Field required    ${WRONG_JSON_BODY}
     ${422}    Extra inputs are not permitted    ${JSON_BODY_EXTRA}
     ${422}    Input should be a valid dictionary or object    ${JSON_BODY}    headers=${XML_CONTENT_HEADERS}

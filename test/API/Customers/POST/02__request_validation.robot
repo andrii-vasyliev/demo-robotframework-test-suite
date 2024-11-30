@@ -10,6 +10,15 @@ Test Setup          Basic Test Setup
 Test Teardown       Basic Test Teardown
 
 
+*** Variables ***
+${DUPLICATE_NAME_LAST_INVALID}      {"name": "${{ FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.EN) }}",
+...                                 "email": "${{ FakeItLibrary.fake_customer_email(FakeItLibrary.Locales.EN) }}",
+...                                 "name": "${EMPTY}"}
+${DUPLICATE_EMAIL_LAST_INVALID}     {"email": "${{ FakeItLibrary.fake_customer_email(FakeItLibrary.Locales.EN) }}",
+...                                 "name": "${{ FakeItLibrary.fake_customer_name(FakeItLibrary.Locales.EN) }}",
+...                                 "email": "(),:;<>[\]@com.pl"}
+
+
 *** Test Cases ***
 Create customer name validation
     [Documentation]    Create customer name validation
@@ -102,6 +111,16 @@ Create customer uniqueness validation
     [Setup]    Setup Uniqueness Validation Case
     ${409}    Customer already exist    name=${${TEST}_CONTEXT.customers[0].name}
     ${409}    Customer already exist    name=${${TEST}_CONTEXT.customers[1].name}    email=${${TEST}_CONTEXT.customers[1].email}
+
+Create customer with duplicate keys validation
+    [Documentation]    Create customer with JSON that has duplicate keys:
+    ...
+    ...    - name is duplicated in the JSON body, last name value is invalid
+    ...    - email is duplicated in the JSON body, last email value is invalid
+    ...
+    [Template]    Create Customer With Duplicate Keys Invalid Request
+    ${422}    cannot be empty    ${DUPLICATE_NAME_LAST_INVALID}
+    ${422}    is not a valid email address    ${DUPLICATE_EMAIL_LAST_INVALID}
 
 
 *** Keywords ***
