@@ -17,10 +17,10 @@ Resource            project_settings.resource
 
 *** Variables ***
 ${SCOPE}                ${None}
-${GLOBAL}               ${{ ApplicationLibrary.exec_context.GlobalContextType.GLOBAL }}
-${SUITES}               ${{ ApplicationLibrary.exec_context.ExecContextType.SUITES }}
-${SUITE}                ${{ ApplicationLibrary.exec_context.ExecContextType.SUITE }}
-${TEST}                 ${{ ApplicationLibrary.exec_context.ExecContextType.TEST }}
+${GLOBAL}               ${{ ApplicationLibrary.GlobalContextType.GLOBAL }}
+${SUITES}               ${{ ApplicationLibrary.ExecContextType.SUITES }}
+${SUITE}                ${{ ApplicationLibrary.ExecContextType.SUITE }}
+${TEST}                 ${{ ApplicationLibrary.ExecContextType.TEST }}
 ${${GLOBAL}_CONTEXT}    ${None}
 ${${SUITES}_CONTEXT}    ${None}
 ${${SUITE}_CONTEXT}     ${None}
