@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation       Data validation keywords:
-...                 - ``Validate Customers``    Validates given list of customer objects against data stored in the system.
-...                 - ``Validate Test Data``    Validates data stored in the context against data stored in the system.
+...                 - *``Validate Customers``*    Validates given list of customer objects against data stored in the system.
+...                 - *``Validate Test Data``*    Validates data stored in the context against data stored in the system.
 
 Resource            project_settings.resource
 
@@ -12,7 +12,7 @@ Validate Customers
     ...    Validates given list of customer objects against data stored in the system.
     ...
     ...    Parameters:
-    ...    - ``@customer_ids``    positional arguments that represent a list of customer Ids
+    ...    - *``@customer_ids``*    positional arguments that represent a list of customer Ids
     ...
     [Arguments]    @{customers}
     ${customer_ids}    Evaluate    [customer.id for customer in $customers]
@@ -25,7 +25,7 @@ Validate Test Data
     ...    Validates data stored in the context against data stored in the system.
     ...
     ...    Parameters:
-    ...    - ``scope``    scope of the context to be validated
+    ...    - *``scope``*    scope of the context to be validated
     ...
     [Arguments]    ${scope}=${SCOPE}
     ${result}    PG Get Customers By Ids    @{${scope.upper()}_CONTEXT.customer_ids}

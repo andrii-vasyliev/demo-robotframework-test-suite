@@ -57,7 +57,7 @@ Create customer with valid name and email
 Create customer with valid name extra cases
     [Documentation]    Create customer with valid name extra cases:
     ...
-    ...    - Characters ``\/.'_&,-+@`` are allowed in the customer name
+    ...    - Characters *``\/.'_&,-+@``* are allowed in the customer name
     ...    - Leading/trailing space characters are trimmed
     ...    - Leading/trailing new line characters are trimmed
     ...    - Leading/trailing tabulation characters are trimmed
@@ -73,8 +73,8 @@ Create customer with valid name extra cases
 Create customer with valid email extra cases
     [Documentation]    Create customer with valid email extra cases:
     ...
-    ...    - Characters ``a-zA-Z0-9`` are allowed in the local- and domain- parts
-    ...    - Printable characters ``!#$%&'*+-/=?^_`{|}~`` are allowed in the local-part
+    ...    - Characters *``a-zA-Z0-9``* are allowed in the local- and domain- parts
+    ...    - Printable characters *``!#$%&'*+-/=?^_`{|}~``* are allowed in the local-part
     ...    - Classic shortest email possible is allowed
     ...    - Single character top domain is also accepted
     ...    - Local-part up to 64 characters is allowed

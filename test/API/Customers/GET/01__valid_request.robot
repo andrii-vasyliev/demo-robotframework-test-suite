@@ -25,7 +25,7 @@ Repeated get customer by Id
     [Documentation]    Repeat the same get customer by Id request
     ...
     ...    - Repeated GET request returns the same result
-    ...    See test case details in the ``Get customer by Id``
+    ...    See test case details in the *``Get customer by Id``*
     ...
     [Template]    Get Customer By Id Valid Request
     ${${SUITE}_CONTEXT.customers[1]}
@@ -50,7 +50,7 @@ Repeated get single customer by name
     [Documentation]    Repeat the same get single customer by name request
     ...
     ...    - Repeated GET request returns the same result
-    ...    See test case details in the ``Get single customer by name``
+    ...    See test case details in the *``Get single customer by name``*
     ...
     [Template]    Get Customers By Parameters Valid Request
     ${${SUITE}_CONTEXT.customers[0].name}    ${None}    ${${SUITE}_CONTEXT.customers[0]}
@@ -75,7 +75,7 @@ Repeat get multiple customers by name
     [Documentation]    Repeat the same get multiple customers by name request
     ...
     ...    - Repeated GET request returns the same result
-    ...    See test case details in the ``Get multiple customers by name``
+    ...    See test case details in the *``Get multiple customers by name``*
     ...
     [Template]    Get Customers By Parameters Valid Request
     ${${SUITE}_CONTEXT.customers[1].name}    ${None}    @{${SUITE}_CONTEXT.customers[1:4]}
@@ -96,7 +96,7 @@ Repeated get single customer by email
     [Documentation]    Repeat the same get single customer by email
     ...
     ...    - Repeated GET request returns the same result
-    ...    See test case details in the ``Get single customer by email``
+    ...    See test case details in the *``Get single customer by email``*
     ...
     [Template]    Get Customers By Parameters Valid Request
     ${None}    ${${SUITE}_CONTEXT.customers[2].email}    ${${SUITE}_CONTEXT.customers[2]}
@@ -116,7 +116,7 @@ Repeated get multiple customers by email
     [Documentation]    Repeat the same get multiple customers by email
     ...
     ...    - Repeated GET request returns the same result
-    ...    See test case details in the ``Get multiple customers by email``
+    ...    See test case details in the *``Get multiple customers by email``*
     ...
     [Template]    Get Customers By Parameters Valid Request
     ${None}    ${${SUITE}_CONTEXT.customers[1].email}    ${${SUITE}_CONTEXT.customers[1]}    ${${SUITE}_CONTEXT.customers[4]}
@@ -134,7 +134,7 @@ Repeated get customer by name and email
     [Documentation]    Repeat the same get customer by name and email
     ...
     ...    - Repeated GET request returns the same result
-    ...    See test case details in the ``Get customer by name and email``
+    ...    See test case details in the *``Get customer by name and email``*
     ...
     [Template]    Get Customers By Parameters Valid Request
     ${${SUITE}_CONTEXT.customers[1].name}    ${${SUITE}_CONTEXT.customers[1].email}    ${${SUITE}_CONTEXT.customers[1]}
@@ -151,7 +151,7 @@ Repeated get customer by some unknown query parameter in addition to known
     [Documentation]    Repeat the same get customer by some unknown query parameter in addition to known
     ...
     ...    - Repeated GET request returns the same result
-    ...    See test case details in the ``Get customer by some unknown query parameter in addition to known``
+    ...    See test case details in the *``Get customer by some unknown query parameter in addition to known``*
     ...
     [Template]    Get Customers By Parameters Valid Request
     ${${SUITE}_CONTEXT.customers[1].name}    ${${SUITE}_CONTEXT.customers[1].email}    ${${SUITE}_CONTEXT.customers[1]}    another_param=some value

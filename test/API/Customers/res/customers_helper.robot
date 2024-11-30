@@ -1,5 +1,16 @@
 *** Settings ***
 Documentation       API Customer template keywords
+...
+...                 - *``Create Customer Valid Request``*    Sends POST request to API Customers that is expected to be valid.
+...                 - *``Create Customer With Duplicate Keys Valid Request``*    Sends POST request to API Customers that is expected to be valid.
+...                 - *``Get Customer By Id Valid Request``*    Send GET request to API Customers to get particular customer by Id.
+...                 - *``Get Customers By Parameters Valid Request``*    Send GET request to API Customers to get customers by name and/or email.
+...                 - *``Create Customer Invalid Request``*    Sends POST request to API Customers that is expected to be invalid.
+...                 - *``Create Customer With Duplicate Keys Invalid Request``*    Sends POST request to API Customers that is expected to be invalid.
+...                 - *``Create Customer Wrong Body Or Mimetype``*    Sends POST request to API Customers with wrong body mimetype.
+...                 - *``Get Customer By Id Invalid Request``*    Sends Get request to API Customers that is expected to be invalid.
+...                 - *``Get Customers By Parameters Invalid Request``*    Send GET request to API Customers to get customers by name and/or email.
+...
 
 Resource            ../../../../res/project_settings.resource
 
@@ -16,7 +27,7 @@ Create Customer Valid Request
     ...    - response body content against expected entity
     ...
     ...    Parameters:
-    ...    - ``&args``    named arguments that represent key/value pairs of the Create Customer body
+    ...    - *``&args``*    named arguments that represent key/value pairs of the Create Customer body
     ...
     [Arguments]    &{args}
     ${body}    Create Dictionary    &{args}
@@ -44,7 +55,7 @@ Create Customer With Duplicate Keys Valid Request
     ...    - response body content against expected entity
     ...
     ...    Parameters:
-    ...    - ``json_string``    json string that represents the Create Customer body
+    ...    - *``json_string``*    json string that represents the Create Customer body
     ...
     [Arguments]    ${json_string}
     Set Operation User
@@ -72,7 +83,7 @@ Get Customer By Id Valid Request
     ...    - response body content against expected entity
     ...
     ...    Parameters:
-    ...    - ``customer``    customer entity to get
+    ...    - *``customer``*    customer entity to get
     ...
     [Arguments]    ${customer}
     ${response}    GET On Session    API    customers/${customer.id}
@@ -90,10 +101,10 @@ Get Customers By Parameters Valid Request
     ...    - response body content against expected entity
     ...
     ...    Parameters:
-    ...    - ``name``    customer name
-    ...    - ``email``    customer email
-    ...    - ``customers``    expected customer entities to get
-    ...    - ``custom_params``    some additional query parameters
+    ...    - *``name``*    customer name
+    ...    - *``email``*    customer email
+    ...    - *``customers``*    expected customer entities to get
+    ...    - *``custom_params``*    some additional query parameters
     ...
     [Arguments]    ${name}=${None}    ${email}=${None}    @{customers}    &{custom_params}
     ${params}    Combine Request Parameters    name=${name}    email=${email}    &{custom_params}
@@ -115,9 +126,9 @@ Create Customer Invalid Request
     ...    - response body content against expected error
     ...
     ...    Parameters:
-    ...    - ``expected_status``    expected response HTTP status code
-    ...    - ``msg``    expected error message
-    ...    - ``&args``    named arguments that represent key/value pairs of the Create Customer body
+    ...    - *``expected_status``*    expected response HTTP status code
+    ...    - *``msg``*    expected error message
+    ...    - *``&args``*    named arguments that represent key/value pairs of the Create Customer body
     ...
     [Arguments]    ${expected_status}    ${msg}    &{args}
     ${body}    Create Dictionary    &{args}
@@ -136,9 +147,9 @@ Create Customer With Duplicate Keys Invalid Request
     ...    - response body content against expected error
     ...
     ...    Parameters:
-    ...    - ``expected_status``    expected response HTTP status code
-    ...    - ``msg``    expected error message
-    ...    - ``json_string``    json string that represents the Create Customer body
+    ...    - *``expected_status``*    expected response HTTP status code
+    ...    - *``msg``*    expected error message
+    ...    - *``json_string``*    json string that represents the Create Customer body
     ...
     [Arguments]    ${expected_status}    ${msg}    ${json_string}
     ${response}    Do POST    API    customers/    ${json_string}    expected_status=any
@@ -156,17 +167,17 @@ Create Customer Wrong Body Or Mimetype
     ...    - response body content against expected error
     ...
     ...    Parameters:
-    ...    - ``expected_status``    expected response HTTP status code
-    ...    - ``msg``    expected error message
-    ...    - ``body``    payload to send
-    ...    - ``&args``    named arguments to be passed to ``Post On Session`` keyword
+    ...    - *``expected_status``*    expected response HTTP status code
+    ...    - *``msg``*    expected error message
+    ...    - *``body``*    payload to send
+    ...    - *``&args``*    named arguments to be passed to *``Post On Session``* keyword
     ...
     [Arguments]    ${expected_status}    ${msg}    ${body}    &{args}
     ${response}    Do POST    API    customers/    ${body}    expected_status=any    &{args}
     Validate API Error Response    ${response}    ${expected_status}
     Should Contain    ${response.json()}[detail][0][msg]    ${msg}    Incorrect Create Customer error message
 
- Get Customer By Id Invalid Request
+Get Customer By Id Invalid Request
     [Documentation]
     ...    Sends Get request to API Customers that is expected to be invalid.
     ...
@@ -177,10 +188,10 @@ Create Customer Wrong Body Or Mimetype
     ...    - response body content against expected error
     ...
     ...    Parameters:
-    ...    - ``expected_status``    expected response HTTP status code
-    ...    - ``msg``    expected error message
-    ...    - ``get_args``    additional arguments to be passed to ``Get On Session`` keyword
-    ...    - ``customer_id``    id of the customer to Get
+    ...    - *``expected_status``*    expected response HTTP status code
+    ...    - *``msg``*    expected error message
+    ...    - *``get_args``*    additional arguments to be passed to *``Get On Session``* keyword
+    ...    - *``customer_id``*    id of the customer to Get
     ...
     [Arguments]    ${expected_status}    ${msg}    ${get_args}=&{EMPTY}    ${customer_id}=${EMPTY}
     ${response}    GET On Session    API    customers/${customer_id}    expected_status=any    &{get_args}
@@ -198,10 +209,10 @@ Get Customers By Parameters Invalid Request
     ...    - response body content against expected entity
     ...
     ...    Parameters:
-    ...    - ``expected_status``    expected response HTTP status code
-    ...    - ``msg``    expected error message
-    ...    - ``get_args``    additional arguments to be passed to ``Get On Session`` keyword
-    ...    - ``&args``    named arguments to be passed to ``Get On Session`` as query parameters
+    ...    - *``expected_status``*    expected response HTTP status code
+    ...    - *``msg``*    expected error message
+    ...    - *``get_args``*    additional arguments to be passed to *``Get On Session``* keyword
+    ...    - *``&args``*    named arguments to be passed to *``Get On Session``* as query parameters
     ...
     [Arguments]    ${expected_status}    ${msg}    ${get_args}=&{EMPTY}    &{args}
     ${params}    Combine Request Parameters    &{args}

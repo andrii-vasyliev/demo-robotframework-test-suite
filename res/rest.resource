@@ -1,8 +1,8 @@
 *** Settings ***
 Documentation       REST API basic keywords:
-...                 - ``Combine Request Parameters``    Combines the given parameters into a query string.
-...                 - ``Do POST``    Sends a ``POST`` request on a previously created HTTP Session.
-...                 Refer to ``POST On Session`` documentation for the list of supported arguments.
+...                 - *``Combine Request Parameters``*    Combines the given parameters into a query string.
+...                 - *``Do POST``*    Sends a *``POST``* request on a previously created HTTP Session.
+...                 Refer to *``POST On Session``* documentation for the list of supported arguments.
 ...
 
 Resource            project_settings.resource
@@ -14,7 +14,7 @@ Combine Request Parameters
     ...    Combines the given parameters into a query string.
     ...
     ...    Parameters:
-    ...    - ``&args``    named arguments that represent query parameters key=value pairs
+    ...    - *``&args``*    named arguments that represent query parameters key=value pairs
     ...
     [Arguments]    &{args}
     ${params}    Evaluate
@@ -24,10 +24,10 @@ Combine Request Parameters
 
 Do POST
     [Documentation]
-    ...    Sends a ``POST`` request on a previously created HTTP Session.
+    ...    Sends a *``POST``* request on a previously created HTTP Session.
     ...
-    ...    Keyword is a wrapper for the ``POST On Session``.
-    ...    Refer to ``POST On Session`` documentation for the list of supported arguments.
+    ...    Keyword is a wrapper for the *``POST On Session``*.
+    ...    Refer to *``POST On Session``* documentation for the list of supported arguments.
     ...
     [Arguments]    ${session}    ${url}    ${body}=${None}    &{args}
     IF    isinstance($body, dict)

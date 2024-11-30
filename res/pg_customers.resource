@@ -1,7 +1,7 @@
 *** Settings ***
 Documentation
 ...                 PosgreSQL API Customers keywords:
-...                 - ``PG Get Customers By Ids``    Gets customers from the PostgreSQL DB by Ids
+...                 - *``PG Get Customers By Ids``*    Gets customers from the PostgreSQL DB by Ids
 ...
 
 Resource            project_settings.resource
@@ -14,7 +14,7 @@ PG Get Customers By Ids
     ...    Gets customers from the PostgreSQL DB by Ids
     ...
     ...    Parameters:
-    ...    - ``@customer_ids``    positional arguments that represent a list of customer Ids
+    ...    - *``@customer_ids``*    positional arguments that represent a list of customer Ids
     ...
     [Arguments]    @{customer_ids}
     ${params}    Create List    ${customer_ids}

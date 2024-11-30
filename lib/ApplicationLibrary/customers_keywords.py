@@ -19,7 +19,15 @@ class CustomersKeywords:
         email: str | None,
         scope: ExecContextType = ExecContextType.TEST,
     ) -> Customer:
-        """Creates customer entity"""
+        """
+        Creates customer entity
+
+        Parameters:
+            - *``customer_id``*: Customer UUID
+            - *``name``*: Customer name
+            - *``email``*: Customer email. Optional
+            - *``scope``*: Execution context scope. Default: TEST
+        """
         customer: Customer = Customer(customer_id, name, email)
 
         exec_context: ExecContext | None = get_exec_context(scope)

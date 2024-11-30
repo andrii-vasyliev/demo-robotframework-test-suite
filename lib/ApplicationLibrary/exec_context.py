@@ -84,9 +84,10 @@ def get_global_context(
 ) -> GlobalContext | None:
     """
     Returns a GlobalContext object of the given type.
+    If no context is found, returns None.
 
-    Defaults to the "GLOBAL" type.
-    Available types: "GLOBAL"
+    Parameters:
+        - *``context``*: The type of global context to return. Defaults to "GLOBAL"
     """
     return BuiltIn().get_variable_value(
         "${" + GlobalContextType[context.upper()] + "_CONTEXT}", None
@@ -98,9 +99,10 @@ def get_exec_context(
 ) -> ExecContext | None:
     """
     Returns an ExecContext object in the given scope.
+    If no context is found, returns None.
 
-    Defaults to the "TEST" scope.
-    Available scopes: "TEST", "SUITE", "SUITES"
+    Parameters:
+        - *``scope``*: The scope of the execution context to return. Defaults to "TEST"
     """
     return BuiltIn().get_variable_value(
         "${" + ExecContextType[scope.upper()] + "_CONTEXT}", None

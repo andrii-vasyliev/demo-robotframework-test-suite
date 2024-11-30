@@ -1,12 +1,12 @@
 *** Settings ***
 Documentation       REST API basic keywords:
-...                 - ``Setup API Session``    Creates an HTTP Session for the API
-...                 - ``Check Service Health``    Queries health endpoint of the provided service.
+...                 - *``Setup API Session``*    Creates an HTTP Session for the API
+...                 - *``Check Service Health``*    Queries health endpoint of the provided service.
 ...                 Check is skipped if health endpoint is not configured.
-...                 - ``Check Service Availability``    Queries ping endpoint of the provided service.
+...                 - *``Check Service Availability``*    Queries ping endpoint of the provided service.
 ...                 Check is skipped if ping endpoint is not configured.
-...                 - ``Validate API Response Template``    Template for the API response validation keywords
-...                 - ``Validate API Error Response``    Validates given API error response
+...                 - *``Validate API Response Template``*    Template for the API response validation keywords
+...                 - *``Validate API Error Response``*    Validates given API error response
 ...
 
 Resource            project_settings.resource
@@ -34,7 +34,7 @@ Check Service Health
     ...    Queries health endpoint of the provided service. Check is skipped if health endpoint is not configured.
     ...
     ...    Parameters:
-    ...    - ``svc_conf``    service configuration dictionary as it is described in the environment configuration
+    ...    - *``svc_conf``*    service configuration dictionary as it is described in the environment configuration
     ...
     [Arguments]    ${svc_conf}
     IF    $svc_conf.get('health', None)
@@ -52,7 +52,7 @@ Check Service Availability
     ...    Queries ping endpoint of the provided service. Check is skipped if ping endpoint is not configured.
     ...
     ...    Parameters:
-    ...    - ``svc_conf``    service configuration dictionary as it is described in the environment configuration
+    ...    - *``svc_conf``*    service configuration dictionary as it is described in the environment configuration
     ...
     [Arguments]    ${svc_conf}
     IF    $svc_conf.get('ping', None)
@@ -77,10 +77,10 @@ Validate API Response Template
     ...    - response body schema
     ...
     ...    Parameters:
-    ...    - ``response``    response to be validated
-    ...    - ``json_schema``    json schema for response validation
-    ...    - ``content_type``    expected Content-Type in the response headers, default "application/json"
-    ...    - ``status_code``    expected response HTTP status code, default 200
+    ...    - *``response``*    response to be validated
+    ...    - *``json_schema``*    json schema for response validation
+    ...    - *``content_type``*    expected Content-Type in the response headers, default "application/json"
+    ...    - *``status_code``*    expected response HTTP status code, default 200
     ...
     [Arguments]    ${response}    ${json_schema}    ${content_type}=application/json    ${status_code}=${200}
     Dictionary Should Contain Item
@@ -102,8 +102,8 @@ Validate API Error Response
     ...    - response body schema
     ...
     ...    Parameters:
-    ...    - ``response``    response to be validated
-    ...    - ``status_code``    expected response status code
+    ...    - *``response``*    response to be validated
+    ...    - *``status_code``*    expected response status code
     ...
     [Arguments]    ${response}    ${status_code}
     Validate API Response Template

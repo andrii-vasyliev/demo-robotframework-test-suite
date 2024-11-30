@@ -15,6 +15,9 @@ __pool: ConnectionPool | None = None
 def pgsql_connect(uri: str) -> None:
     """
     Connects to PostgreSQL database.
+
+    Parameters:
+        - *``uri``*: connection URI
     """
     global __pool
     if __pool is not None:
@@ -43,6 +46,10 @@ def pgsql_close() -> None:
 def get_cursor(**kwargs) -> Generator[Cursor[Tuple[Any]], Any, None]:
     """
     Gets cursor from the PostgreSQL connection pool.
+    The cursor is automatically closed after the execution of the block.
+
+    Parameters:
+        - *``kwargs``*: keyword arguments passed to the cursor
     """
     if __pool is None:
         raise Exception("PostgreSQL database is not initialized")
@@ -63,7 +70,12 @@ def pgsql_query(
     query: LiteralString, params: list | None = None, **kwargs
 ) -> List[Tuple[Any, ...]]:
     """
-    Executes ``query`` with ``params`` on PostgreSQL database and returns result.
+    Executes *``query``* with *``params``* on PostgreSQL database and returns result.
+    Each row is represented as a tuple of values.
+
+    Parameters:
+        - *``query``*: query to execute
+        - *``params``*: query parameters
     """
     with get_cursor(**kwargs) as cursor:
         result: List[Tuple[Any, ...]] = cursor.execute(query, params).fetchall()
@@ -74,7 +86,12 @@ def pgsql_query(
 @keyword()
 def pgsql_execute(command: LiteralString, params: list | None = None, **kwargs) -> None:
     """
-    Executes ``command`` with ``params`` on PostgreSQL database.
+    Executes *``command``* with *``params``* on PostgreSQL database.
+    The command does not return any result.
+
+    Parameters:
+        - *``command``*: command to execute
+        - *``params``*: command parameters
     """
     with get_cursor(**kwargs) as cursor:
         cursor.execute(command, params)

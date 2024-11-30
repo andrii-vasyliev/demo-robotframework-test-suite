@@ -1,16 +1,16 @@
 *** Settings ***
 Documentation       Basic project keywords:
-...                 - ``Project Setup``    Performs basic test project setup
-...                 - ``Project Teardown``    Performs basic test project teardown
-...                 - ``Basic Suites Setup``    Performs basic suites setup (context is available in current suite, its sub-suites and test cases)
-...                 - ``Basic Suites Teardown``    Performs basic suites teardown
-...                 - ``Basic Suite Setup``    Performs basic suite setup (context is available only in current suite)
-...                 - ``Basic Suite Teardown``    Performs basic suite teardown
-...                 - ``Basic Test Setup``    Performs basic test case setup (context is available only in current test case)
-...                 - ``Basic Test Teardown``    Performs basic test case teardown
-...                 - ``Set Operation Start``    Sets operation start date/time using current PostgreSQL date/time
-...                 - ``Set Operation End``    Sets operation end date/time using current PostgreSQL date/time
-...                 - ``Set Operation User``    Sets operation user
+...                 - *``Project Setup``*    Performs basic test project setup
+...                 - *``Project Teardown``*    Performs basic test project teardown
+...                 - *``Basic Suites Setup``*    Performs basic suites setup (context is available in current suite, its sub-suites and test cases)
+...                 - *``Basic Suites Teardown``*    Performs basic suites teardown
+...                 - *``Basic Suite Setup``*    Performs basic suite setup (context is available only in current suite)
+...                 - *``Basic Suite Teardown``*    Performs basic suite teardown
+...                 - *``Basic Test Setup``*    Performs basic test case setup (context is available only in current test case)
+...                 - *``Basic Test Teardown``*    Performs basic test case teardown
+...                 - *``Set Operation Start``*    Sets operation start date/time using current PostgreSQL date/time
+...                 - *``Set Operation End``*    Sets operation end date/time using current PostgreSQL date/time
+...                 - *``Set Operation User``*    Sets operation user
 
 Resource            project_settings.resource
 
@@ -121,7 +121,7 @@ Set Operation Start
     ...    to determine if create date of the object is acceptable.
     ...
     ...    Parameters:
-    ...    - ``scope``    exec context to work with, ``SUITES``, ``SUITE`` or ``TEST``, default is current scope
+    ...    - *``scope``*    exec context to work with, *``SUITES``*, *``SUITE``* or *``TEST``*, default is current scope
     ...
     [Arguments]    ${scope}=${SCOPE}
     ${result}    Pgsql Query    SELECT current_timestamp
@@ -136,7 +136,7 @@ Set Operation End
     ...    to determine if create date of the object is acceptable.
     ...
     ...    Parameters:
-    ...    - ``scope``    exec context to work with, ``SUITES``, ``SUITE`` or ``TEST``, default is current scope
+    ...    - *``scope``*    exec context to work with, *``SUITES``*, *``SUITE``* or *``TEST``*, default is current scope
     ...
     [Arguments]    ${scope}=${SCOPE}
     ${result}    Pgsql Query    SELECT current_timestamp
@@ -151,8 +151,8 @@ Set Operation User
     ...    to determine if the object is created by expected user.
     ...
     ...    Parameters:
-    ...    - ``user_name``    user name that is an author of the operation, default ``api``
-    ...    - ``scope``    exec context to work with, ``SUITES``, ``SUITE`` or ``TEST``, default is current scope
+    ...    - *``user_name``*    user name that is an author of the operation, default *``api``*
+    ...    - *``scope``*    exec context to work with, *``SUITES``*, *``SUITE``* or *``TEST``*, default is current scope
     ...
     [Arguments]    ${user_name}=api    ${scope}=${SCOPE}
     ${${scope.upper()}_CONTEXT.audit_info.user}    Set Variable    ${user_name}

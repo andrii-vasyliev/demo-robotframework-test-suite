@@ -28,9 +28,9 @@ Create customer name validation
     ...    - Request with name is null is rejected
     ...    - Request with name is null but valid email is rejected
     ...    - Request with empty name is rejected
-    ...    - Request with name is ``space`` is rejected
-    ...    - Request with name containig ``new line`` is rejected
-    ...    - Request with name containig ``tab`` is rejected
+    ...    - Request with name is *``space``* is rejected
+    ...    - Request with name containig *``new line``* is rejected
+    ...    - Request with name containig *``tab``* is rejected
     ...    - Requests with name containig not allowed characters are rejected
     ...
     [Template]    Create Customer Invalid Request

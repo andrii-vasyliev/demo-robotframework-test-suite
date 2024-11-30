@@ -1,6 +1,6 @@
 *** Settings ***
 Documentation       API Orders keywords:
-...                 - ``Validate Create Order Success Response``    Validates given successful API Create Order response
+...                 - *``Validate Create Order Success Response``*    Validates given successful API Create Order response
 ...
 
 Resource            project_settings.resource
@@ -16,7 +16,7 @@ Validate Create Order Success Response
     ...    - response body schema
     ...
     ...    Parameters:
-    ...    - ``response``    response to be validated
+    ...    - *``response``*    response to be validated
     ...
     [Arguments]    ${response}
     Validate API Response Template    ${response}    ${JSD_CREATE_ORDER_SUCCESS}    application/json    ${201}
