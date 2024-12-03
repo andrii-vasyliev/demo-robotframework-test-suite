@@ -50,6 +50,8 @@ def fake_customer_email(
         user = '"' + user + '"'
     else:
         user = user.replace(" ", replace_spaces_with).replace("..", ".")
+        if user[-1] in ".":
+            user = user[:-1]
 
     match locale:
         case Locales.PL:
