@@ -5,18 +5,14 @@ from ApplicationLibrary.entity import Customer, Item
 from ApplicationLibrary.utils import AuditInfo
 
 
-class GlobalContextType(StrEnum):
-    """Enum for the global context type"""
-
-    GLOBAL = "GLOBAL"
-
-
 class ExecContextType(StrEnum):
     """Enum for the exec context type"""
 
+    LOCAL = "LOCAL"
     TEST = "TEST"
     SUITE = "SUITE"
     SUITES = "SUITES"
+    GLOBAL = "GLOBAL"
 
 
 class GlobalContext:
@@ -79,23 +75,18 @@ class ExecContext:
         return f"ExecContext(customers={self.customers}, audit_info={self.audit_info})"
 
 
-def get_global_context(
-    context: GlobalContextType = GlobalContextType.GLOBAL,
-) -> GlobalContext | None:
+def get_global_context() -> GlobalContext | None:
     """
     Returns a GlobalContext object of the given type.
     If no context is found, returns None.
-
-    Parameters:
-        - *``context``*: The type of global context to return. Defaults to "GLOBAL"
     """
     return BuiltIn().get_variable_value(
-        "${" + GlobalContextType[context.upper()] + "_CONTEXT}", None
+        "${" + ExecContextType.GLOBAL + "_CONTEXT}", None
     )
 
 
 def get_exec_context(
-    scope: ExecContextType = ExecContextType.TEST,
+    scope: ExecContextType | None = ExecContextType.TEST,
 ) -> ExecContext | None:
     """
     Returns an ExecContext object in the given scope.
@@ -104,6 +95,15 @@ def get_exec_context(
     Parameters:
         - *``scope``*: The scope of the execution context to return. Defaults to "TEST"
     """
-    return BuiltIn().get_variable_value(
-        "${" + ExecContextType[scope.upper()] + "_CONTEXT}", None
+    if scope == ExecContextType.GLOBAL:
+        raise ValueError(
+            "Global context is not supported. Use get_global_context() instead."
+        )
+
+    return (
+        BuiltIn().get_variable_value(
+            "${" + ExecContextType[scope.upper()] + "_CONTEXT}", None
+        )
+        if scope
+        else None
     )

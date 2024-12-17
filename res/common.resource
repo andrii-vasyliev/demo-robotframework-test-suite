@@ -17,14 +17,16 @@ Resource            project_settings.resource
 
 *** Variables ***
 ${SCOPE}                ${None}
-${GLOBAL}               ${{ ApplicationLibrary.GlobalContextType.GLOBAL }}
+${GLOBAL}               ${{ ApplicationLibrary.ExecContextType.GLOBAL }}
 ${SUITES}               ${{ ApplicationLibrary.ExecContextType.SUITES }}
 ${SUITE}                ${{ ApplicationLibrary.ExecContextType.SUITE }}
 ${TEST}                 ${{ ApplicationLibrary.ExecContextType.TEST }}
+${LOCAL}                ${{ ApplicationLibrary.ExecContextType.LOCAL }}
 ${${GLOBAL}_CONTEXT}    ${None}
 ${${SUITES}_CONTEXT}    ${None}
 ${${SUITE}_CONTEXT}     ${None}
 ${${TEST}_CONTEXT}      ${None}
+${${LOCAL}_CONTEXT}     ${None}
 
 
 *** Keywords ***

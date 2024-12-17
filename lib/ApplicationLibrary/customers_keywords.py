@@ -17,7 +17,7 @@ class CustomersKeywords:
         customer_id: str,
         name: str,
         email: str | None,
-        scope: ExecContextType = ExecContextType.TEST,
+        scope: ExecContextType | None = ExecContextType.TEST,
     ) -> Customer:
         """
         Creates customer entity

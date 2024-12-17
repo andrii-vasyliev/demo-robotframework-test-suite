@@ -8,7 +8,7 @@
             "terminal": "integrated",
             "args": [
                 "--loglevel",
-                "DEBUG",
+                "TRACE",
                 "--outputdir",
                 "${workspaceFolder}/log",
             ]

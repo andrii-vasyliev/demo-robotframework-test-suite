@@ -17,7 +17,8 @@ class OrdersKeywords:
     @staticmethod
     @keyword
     def define_order(
-        items: list[dict], scope: ExecContextType = ExecContextType.TEST
+        items: list[dict],
+        scope: ExecContextType | None = ExecContextType.TEST,
     ) -> Order:
         """Creates order entity"""
         gc: GlobalContext | None = get_global_context()
@@ -46,7 +47,8 @@ class OrdersKeywords:
     @staticmethod
     @keyword
     def populate_order_data_from_response(
-        order: Order, response: dict, scope: ExecContextType = ExecContextType.TEST
+        order: Order,
+        response: dict,
     ) -> None:
         """
         Populates order data from response
