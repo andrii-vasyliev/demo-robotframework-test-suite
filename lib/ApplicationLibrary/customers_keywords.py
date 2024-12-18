@@ -1,7 +1,7 @@
 from robot.api.deco import keyword
 from ApplicationLibrary.utils import AuditInfo
 from ApplicationLibrary.exec_context import (
-    ExecContextType,
+    ExecContextScope,
     ExecContext,
     get_exec_context,
 )
@@ -17,7 +17,7 @@ class CustomersKeywords:
         customer_id: str,
         name: str,
         email: str | None,
-        scope: ExecContextType | None = ExecContextType.TEST,
+        scope: ExecContextScope | None = ExecContextScope.TEST,
     ) -> Customer:
         """
         Creates customer entity

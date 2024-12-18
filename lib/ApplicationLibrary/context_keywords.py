@@ -7,7 +7,7 @@ class ContextKeywords:
 
     @staticmethod
     @keyword
-    def define_global_context(items: list[dict]) -> GlobalContext:
+    def define_global_context(items: list[dict] | None = None) -> GlobalContext:
         """
         Creates global context object
 

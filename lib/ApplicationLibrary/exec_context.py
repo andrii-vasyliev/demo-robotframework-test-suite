@@ -1,3 +1,13 @@
+"""
+Execution context module.
+
+GlobalContext encompasses fundamental application entities such as the Product Catalog,
+which can be referenced and utilized in test cases.
+
+ExecContext details the application entities defined within suites and test cases,
+which are the focus of validation, including Customers, Orders, and more.
+"""
+
 from typing import Any
 from enum import StrEnum
 from robot.libraries.BuiltIn import BuiltIn
@@ -5,14 +15,27 @@ from ApplicationLibrary.entity import Customer, Item
 from ApplicationLibrary.utils import AuditInfo
 
 
-class ExecContextType(StrEnum):
-    """Enum for the exec context type"""
+class ExecContextScope(StrEnum):
+    """
+    Enum for the execution context type.
 
-    LOCAL = "LOCAL"
+    Values represent the variable availability scopes supported by the Robot Framework VAR syntax.
+
+    Note:
+    - LOCAL is excluded as it is the default value of the VAR syntax.
+    - GLOBAL is reserved for the global context.
+    """
+
     TEST = "TEST"
     SUITE = "SUITE"
     SUITES = "SUITES"
-    GLOBAL = "GLOBAL"
+
+
+"""
+GLOBAL_SCOPE represents the value of the global scope in the Robot Framework VAR syntax,
+used within keywords related to the global context.
+"""
+GLOBAL_SCOPE = "GLOBAL"
 
 
 class GlobalContext:
@@ -80,13 +103,11 @@ def get_global_context() -> GlobalContext | None:
     Returns a GlobalContext object of the given type.
     If no context is found, returns None.
     """
-    return BuiltIn().get_variable_value(
-        "${" + ExecContextType.GLOBAL + "_CONTEXT}", None
-    )
+    return BuiltIn().get_variable_value("${" + GLOBAL_SCOPE + "_CONTEXT}", None)
 
 
 def get_exec_context(
-    scope: ExecContextType | None = ExecContextType.TEST,
+    scope: ExecContextScope | None = ExecContextScope.TEST,
 ) -> ExecContext | None:
     """
     Returns an ExecContext object in the given scope.
@@ -95,14 +116,9 @@ def get_exec_context(
     Parameters:
         - *``scope``*: The scope of the execution context to return. Defaults to "TEST"
     """
-    if scope == ExecContextType.GLOBAL:
-        raise ValueError(
-            "Global context is not supported. Use get_global_context() instead."
-        )
-
     return (
         BuiltIn().get_variable_value(
-            "${" + ExecContextType[scope.upper()] + "_CONTEXT}", None
+            "${" + ExecContextScope[scope.upper()] + "_CONTEXT}", None
         )
         if scope
         else None

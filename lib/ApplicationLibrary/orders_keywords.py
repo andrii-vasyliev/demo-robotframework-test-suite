@@ -2,7 +2,7 @@ from datetime import datetime
 from robot.api.deco import keyword
 from ApplicationLibrary.utils import AuditInfo
 from ApplicationLibrary.exec_context import (
-    ExecContextType,
+    ExecContextScope,
     GlobalContext,
     ExecContext,
     get_global_context,
@@ -18,7 +18,7 @@ class OrdersKeywords:
     @keyword
     def define_order(
         items: list[dict],
-        scope: ExecContextType | None = ExecContextType.TEST,
+        scope: ExecContextScope | None = ExecContextScope.TEST,
     ) -> Order:
         """Creates order entity"""
         gc: GlobalContext | None = get_global_context()
