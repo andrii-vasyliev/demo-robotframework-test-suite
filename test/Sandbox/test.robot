@@ -3,8 +3,8 @@ Documentation       Sandbox for approaches testing and proof of concept
 
 Resource            ../../res/project_settings.resource
 
-Suite Setup         Setup Suite
-Suite Teardown      Basic Suite Teardown
+# Suite Setup    Setup Suite
+# Suite Teardown    Basic Suite Teardown
 Test Setup          Basic Test Setup
 Test Teardown       Basic Test Teardown
 
@@ -56,9 +56,18 @@ Faker
     Log    ${{ FakeItLibrary.fake_domain_name(15) }}
     Log    ${{ FakeItLibrary.fake_domain_name(255) }}
 
+No scope
+    [Documentation]    Suite or Suites context must not be initialized to check this case properly
+    ...    Comment ``Suite Setup/Teardown`` in the ``Settings`` section before execution
+    [Setup]    No Operation
+    Setup API Session
+    ${c}    API Create Customer
+    Log Many    ${SUITES_CONTEXT}    ${SUITE_CONTEXT}    ${TEST_CONTEXT}
+    [Teardown]    No Operation
 
 Pimg
     Check Service Availability    ${API}
+
 
 *** Keywords ***
 Setup Suite

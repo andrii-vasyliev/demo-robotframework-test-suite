@@ -124,9 +124,11 @@ Set Operation Start
     ...    - *``scope``*    exec context to work with, *``SUITES``*, *``SUITE``* or *``TEST``*, default is current scope
     ...
     [Arguments]    ${scope}=${SCOPE}
-    ${result}    Pgsql Query    SELECT current_timestamp
-    Should Not Be Empty    ${result}    Unable to get timestamp from the database
-    ${${scope.upper()}_CONTEXT.audit_info.timestamp.start_date}    Set Variable    ${result}[0][0]
+    IF    $scope
+        ${result}    Pgsql Query    SELECT current_timestamp
+        Should Not Be Empty    ${result}    Unable to get timestamp from the database
+        ${${scope.upper()}_CONTEXT.audit_info.timestamp.start_date}    Set Variable    ${result}[0][0]
+    END
 
 Set Operation End
     [Documentation]
@@ -139,9 +141,11 @@ Set Operation End
     ...    - *``scope``*    exec context to work with, *``SUITES``*, *``SUITE``* or *``TEST``*, default is current scope
     ...
     [Arguments]    ${scope}=${SCOPE}
-    ${result}    Pgsql Query    SELECT current_timestamp
-    Should Not Be Empty    ${result}    Unable to get timestamp from the database
-    ${${scope.upper()}_CONTEXT.audit_info.timestamp.end_date}    Set Variable    ${result}[0][0]
+    IF    $scope
+        ${result}    Pgsql Query    SELECT current_timestamp
+        Should Not Be Empty    ${result}    Unable to get timestamp from the database
+        ${${scope.upper()}_CONTEXT.audit_info.timestamp.end_date}    Set Variable    ${result}[0][0]
+    END
 
 Set Operation User
     [Documentation]
@@ -155,4 +159,6 @@ Set Operation User
     ...    - *``scope``*    exec context to work with, *``SUITES``*, *``SUITE``* or *``TEST``*, default is current scope
     ...
     [Arguments]    ${user_name}=api    ${scope}=${SCOPE}
-    ${${scope.upper()}_CONTEXT.audit_info.user}    Set Variable    ${user_name}
+    IF    $scope
+        ${${scope.upper()}_CONTEXT.audit_info.user}    Set Variable    ${user_name}
+    END
