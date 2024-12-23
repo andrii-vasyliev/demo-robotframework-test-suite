@@ -31,10 +31,9 @@ Create Customer Valid Request
     ...
     [Arguments]    &{args}
     ${body}    Create Dictionary    &{args}
-    Set Operation User
-    Set Operation Start
+    Event Audit Start
     ${response}    Do POST    API    customers/    ${body}
-    Set Operation End
+    Event Audit End
     Validate Create Customer Success Response    ${response}
     ${c}    Define Customer
     ...    ${response.json()}[id]
@@ -58,10 +57,9 @@ Create Customer With Duplicate Keys Valid Request
     ...    - *``json_string``*    json string that represents the Create Customer body
     ...
     [Arguments]    ${json_string}
-    Set Operation User
-    Set Operation Start
+    Event Audit Start
     ${response}    Do POST    API    customers/    ${json_string}
-    Set Operation End
+    Event Audit End
     Validate Create Customer Success Response    ${response}
     ${json_object}    Convert String To Json    ${json_string}
     ${c}    Define Customer

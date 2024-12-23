@@ -45,9 +45,9 @@ Create Order Valid Request
     ...
     [Arguments]    &{args}
     ${body}    Create Dictionary    &{args}
-    Set Operation Start
+    Event Audit Start
     ${response}    Do POST    API    orders    ${body}
-    Set Operation End
+    Event Audit End
     Validate Create Order Success Response    ${response}
     ${o}    Define Order    ${args.get('items', None)}
     Populate Order Data From Response    ${o}    ${response.json()}

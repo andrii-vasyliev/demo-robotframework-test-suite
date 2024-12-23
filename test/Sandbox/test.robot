@@ -21,7 +21,7 @@ DB Query
 Check Init 1
     IF    $${SUITE}_CONTEXT    Log    ${${SUITE}_CONTEXT}
     IF    $${TEST}_CONTEXT
-        Set Operation Start
+        Set Event Audit Info Start Date
         Log    ${${TEST}_CONTEXT}
     END
     Log Variables
@@ -29,7 +29,7 @@ Check Init 1
 Check Init 2
     IF    $${SUITE}_CONTEXT    Log    ${${SUITE}_CONTEXT}
     IF    $${TEST}_CONTEXT
-        Set Operation Start
+        Set Event Audit Info Start Date
         Log    ${${TEST}_CONTEXT}
     END
 
@@ -72,4 +72,4 @@ Pimg
 *** Keywords ***
 Setup Suite
     Basic Suite Setup
-    Set Operation Start
+    Set Event Audit Info Start Date

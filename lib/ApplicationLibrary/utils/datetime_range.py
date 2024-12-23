@@ -2,6 +2,25 @@ from datetime import datetime
 
 
 class DateTimeRange:
+    """
+    Class to represent a range of dates.
+
+    Attributes:
+        start_date (datetime): The start date of the range.
+        end_date (datetime): The end date of the range.
+
+    Methods:
+        is_empty() -> bool: Check if the range is empty.
+        __eq__(other: object) -> bool: Check if the range is equal to another range or date.
+        __ne__(other: object) -> bool: Check if the range is not equal to another range or date.
+        __lt__(other: object) -> bool: Check if the range is less than another range or date.
+        __le__(other: object) -> bool: Check if the range is less than or equal to another range or date.
+        __gt__(other: object) -> bool: Check if the range is greater than another range or date.
+        __ge__(other: object) -> bool: Check if the range is greater than or equal to another range or date.
+        __contains__(other: object) -> bool: Check if the range contains another range or date.
+        __repr__() -> str: Return the string representation of the range.
+    """
+
     def __init__(
         self, start_date: datetime | None = None, end_date: datetime | None = None
     ) -> None:
@@ -10,6 +29,7 @@ class DateTimeRange:
 
     @property
     def is_empty(self) -> bool:
+        """Check if the range is empty."""
         return not (self._start or self._end)
 
     @property
@@ -29,6 +49,7 @@ class DateTimeRange:
         self._end = value
 
     def __eq__(self, other: object) -> bool:
+        """Check if the range is equal to another range or date."""
         if other is None or self.is_empty:
             return False
 
@@ -47,52 +68,86 @@ class DateTimeRange:
                 return False
 
             if self._start and self._end:
-                if not (other._start and other._end):
-                    return False
                 return other._start == self._start and other._end == self._end
             elif self._start:
-                if other._start is None:
-                    return False
-                elif other._end is None:
-                    return other._start == self._start
-                else:
-                    return False
+                return other._start == self._start
             elif self._end:
-                if other._start is None:
-                    return self._end == other._end
-                elif other._end is None:
-                    return False
-                else:
-                    return False
+                return self._end == other._end
 
         return NotImplemented
 
     def __ne__(self, other: object) -> bool:
+        """Check if the range is not equal to another range or date."""
         return not self.__eq__(other)
 
     def __lt__(self, other: object) -> bool:
+        """Check if the range is less than another range or date."""
         if other is None or self.is_empty:
             return False
 
-        # TODO: to implement when will be required
+        if isinstance(other, datetime):
+            if self._start:
+                return self._start < other
+            elif self._end:
+                return self._end < other
+
+        if isinstance(other, DateTimeRange):
+            if other.is_empty:
+                return False
+
+            if self._start:
+                if other._start:
+                    return self._start < other._start
+                elif other._end:
+                    return self._start < other._end
+            elif self._end:
+                if other._start:
+                    return self._end < other._start
+                elif other._end:
+                    return self._end < other._end
 
         return NotImplemented
 
     def __le__(self, other: object) -> bool:
+        """Check if the range is less than or equal to another range or date."""
         return self.__lt__(other) or self.__eq__(other)
 
     def __gt__(self, other: object) -> bool:
+        """Check if the range is greater than another range or date."""
         if other is None or self.is_empty:
             return False
 
-        # TODO: to implement when will be required
+        if isinstance(other, datetime):
+            if self._start:
+                return self._start > other
+            elif self._end:
+                return self._end > other
+
+        if isinstance(other, DateTimeRange):
+            if other.is_empty:
+                return False
+
+            if self._start:
+                if other._start:
+                    return self._start > other._start
+                elif other._end:
+                    return self._start > other._end
+            elif self._end:
+                if other._end:
+                    return self._end > other._end
+                elif other._start:
+                    return self._end > other._start
+            elif self._end:
+                return False
 
         return NotImplemented
 
     def __ge__(self, other: object) -> bool:
+        """Check if the range is greater than or equal to another range or date."""
         return self.__gt__(other) or self.__eq__(other)
 
     def __contains__(self, other: object) -> bool:
+        """Check if the range contains another range or date."""
         if other is None or self.is_empty:
             return False
 
@@ -111,23 +166,20 @@ class DateTimeRange:
                 return False
 
             if self._start and self._end:
-                if not (other._start and other._end):
+                if other._start and other._end:
+                    return other._start in self and other._end in self
+                else:
                     return False
-                return other._start in self and other._end in self
             elif self._start:
-                if other._start is None:
-                    return False
-                elif other._end is None:
+                if other._start:
                     return other._start in self
                 else:
-                    return other._start in self and other._end in self
-            elif self._end:
-                if other._start is None:
-                    return other._end in self
-                elif other._end is None:
                     return False
+            elif self._end:
+                if other._end:
+                    return other._end in self
                 else:
-                    return other._start in self and other._end in self
+                    return False
 
         return NotImplemented
 

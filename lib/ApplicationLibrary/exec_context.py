@@ -39,7 +39,24 @@ GLOBAL_SCOPE = "GLOBAL"
 
 
 class GlobalContext:
-    """Base class for the global context"""
+    """
+    GlobalContext is a base class for managing a global context.
+    Attributes:
+        catalog (tuple): A tuple containing instances of Item.
+
+    Methods:
+        __init__(items: list[dict] | None = None):
+            Initializes the GlobalContext with a list of items.
+
+        get_item_by_id(id: int) -> Item | None:
+            Retrieves an item from the catalog by its id.
+
+        clear() -> None:
+            Clears all items from the catalog.
+
+        __repr__() -> str:
+            Returns a string representation of the GlobalContext instance.
+    """
 
     def __init__(self, items: list[dict] | None = None):
         self.catalog: tuple = tuple()
@@ -63,7 +80,24 @@ class GlobalContext:
 
 
 class ExecContext:
-    """Base class for the execution context"""
+    """
+    ExecContext is a base class for managing an execution context.
+    Attributes:
+        _customers (list): A list of Customer objects.
+        audit_info (AuditInfo): An AuditInfo object containing audit information.
+
+    Properties:
+        customers (list[Customer]): Gets the list of Customer objects.
+        customer_ids (list[str]): Returns a list of customer ids.
+        customer_rows (list[tuple[Any, ...]]): Returns a list of customer rows.
+
+    Methods:
+        __init__():
+            Initializes the ExecContext with a list of customers and audit information.
+
+        __repr__() -> str:
+            Returns a string representation of the ExecContext instance.
+    """
 
     def __init__(self) -> None:
         self._customers: list[Customer] | None = None

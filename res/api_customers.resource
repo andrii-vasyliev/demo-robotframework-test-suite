@@ -32,10 +32,9 @@ API Create Customer
     ${body}    Create Dictionary
     ${name}    Populate Customer Name    ${body}    ${name}
     ${email}    Populate Customer Email    ${body}    ${email}
-    Set Operation User    scope=${scope}
-    Set Operation Start    scope=${scope}
+    Event Audit Start    scope=${scope}
     ${response}    Do POST    API    customers/    ${body}
-    Set Operation End    scope=${scope}
+    Event Audit End    scope=${scope}
     ${c}    Define Customer    ${response.json()}[id]    ${name}    ${email}    scope=${scope}
     RETURN    ${c}
 

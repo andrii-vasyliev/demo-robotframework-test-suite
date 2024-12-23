@@ -8,9 +8,11 @@ Documentation       Basic project keywords:
 ...                 - *``Basic Suite Teardown``*    Performs basic suite teardown
 ...                 - *``Basic Test Setup``*    Performs basic test case setup (context is available only in current test case)
 ...                 - *``Basic Test Teardown``*    Performs basic test case teardown
-...                 - *``Set Operation Start``*    Sets operation start date/time using current PostgreSQL date/time
-...                 - *``Set Operation End``*    Sets operation end date/time using current PostgreSQL date/time
-...                 - *``Set Operation User``*    Sets operation user
+...                 - *``Set Event Audit Info Start Date``*    Sets operation start date/time using current PostgreSQL date/time
+...                 - *``Set Event Audit Info End Date``*    Sets operation end date/time using current PostgreSQL date/time
+...                 - *``Set Event Audit Info User``*    Sets operation user
+...                 - *``Event Audit Start``*    Sets operation start date/time and user
+...                 - *``Event Audit End``*    Sets operation end date/time
 
 Resource            project_settings.resource
 
@@ -113,7 +115,7 @@ Basic Test Teardown
     VAR    ${SCOPE}    ${None}    scope=${TEST}
     VAR    ${${TEST}_CONTEXT}    ${None}    scope=${TEST}
 
-Set Operation Start
+Set Event Audit Info Start Date
     [Documentation]
     ...    Sets operation start date/time using current PostgreSQL date/time
     ...
@@ -130,7 +132,7 @@ Set Operation Start
         ${${scope.upper()}_CONTEXT.audit_info.timestamp.start_date}    Set Variable    ${result}[0][0]
     END
 
-Set Operation End
+Set Event Audit Info End Date
     [Documentation]
     ...    Sets operation end date/time using current PostgreSQL date/time
     ...
@@ -147,7 +149,7 @@ Set Operation End
         ${${scope.upper()}_CONTEXT.audit_info.timestamp.end_date}    Set Variable    ${result}[0][0]
     END
 
-Set Operation User
+Set Event Audit Info User
     [Documentation]
     ...    Sets operation user
     ...
@@ -162,3 +164,25 @@ Set Operation User
     IF    $scope
         ${${scope.upper()}_CONTEXT.audit_info.user}    Set Variable    ${user_name}
     END
+
+Event Audit Start
+    [Documentation]
+    ...    Sets operation start date/time and user
+    ...
+    ...    Parameters:
+    ...    - *``user_name``*    user name that is an author of the operation, default *``api``*
+    ...    - *``scope``*    exec context to work with, *``SUITES``*, *``SUITE``* or *``TEST``*, default is current scope
+    ...
+    [Arguments]    ${user_name}=api    ${scope}=${SCOPE}
+    Set Event Audit Info User    ${user_name}    ${scope}
+    Set Event Audit Info Start Date    ${scope}
+
+Event Audit End
+    [Documentation]
+    ...    Sets operation end date/time
+    ...
+    ...    Parameters:
+    ...    - *``scope``*    exec context to work with, *``SUITES``*, *``SUITE``* or *``TEST``*, default is current scope
+    ...
+    [Arguments]    ${scope}=${SCOPE}
+    Set Event Audit Info End Date    ${scope}
