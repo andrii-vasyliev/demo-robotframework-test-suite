@@ -99,14 +99,11 @@ Get Customers By Parameters Valid Request
     ...    - response body content against expected entity
     ...
     ...    Parameters:
-    ...    - *``name``*    customer name
-    ...    - *``email``*    customer email
     ...    - *``customers``*    expected customer entities to get
-    ...    - *``custom_params``*    some additional query parameters
+    ...    - *``params``*    some additional query parameters
     ...
-    [Arguments]    ${name}=${None}    ${email}=${None}    @{customers}    &{custom_params}
-    ${params}    Combine Request Parameters    name=${name}    email=${email}    &{custom_params}
-    ${response}    GET On Session    API    customers/    ${params}
+    [Arguments]    @{customers}    &{params}
+    ${response}    GET On Session    API    customers/    params=${params}
     Validate Get Customers Success Response    ${response}
     ${customers_json}    Evaluate    {"customers": sorted([c.json for c in $customers], key=lambda x: x["id"])}
     ${sorted_response}    Evaluate
@@ -210,10 +207,9 @@ Get Customers By Parameters Invalid Request
     ...    - *``expected_status``*    expected response HTTP status code
     ...    - *``msg``*    expected error message
     ...    - *``get_args``*    additional arguments to be passed to *``Get On Session``* keyword
-    ...    - *``&args``*    named arguments to be passed to *``Get On Session``* as query parameters
+    ...    - *``&params``*    named arguments to be passed to *``Get On Session``* as query parameters
     ...
-    [Arguments]    ${expected_status}    ${msg}    ${get_args}=&{EMPTY}    &{args}
-    ${params}    Combine Request Parameters    &{args}
-    ${response}    GET On Session    API    customers/    ${params}    expected_status=any    &{get_args}
+    [Arguments]    ${expected_status}    ${msg}    ${get_args}=&{EMPTY}    &{params}
+    ${response}    GET On Session    API    customers/    params=${params}    expected_status=any    &{get_args}
     Validate API Error Response    ${response}    ${expected_status}
     Should Contain    ${response.json()}[detail][0][msg]    ${msg}    Incorrect Get Customers error message

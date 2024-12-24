@@ -1,6 +1,5 @@
 *** Settings ***
 Documentation       REST API basic keywords:
-...                 - *``Combine Request Parameters``*    Combines the given parameters into a query string.
 ...                 - *``Do POST``*    Sends a *``POST``* request on a previously created HTTP Session.
 ...                 Refer to *``POST On Session``* documentation for the list of supported arguments.
 ...
@@ -9,19 +8,6 @@ Resource            project_settings.resource
 
 
 *** Keywords ***
-Combine Request Parameters
-    [Documentation]
-    ...    Combines the given parameters into a query string.
-    ...
-    ...    Parameters:
-    ...    - *``&args``*    named arguments that represent query parameters key=value pairs
-    ...
-    [Arguments]    &{args}
-    ${params}    Evaluate
-    ...    urllib.parse.urlencode({k: v for k, v in $args.items() if v is not None})
-    ...    modules=urllib.parse
-    RETURN    ${params}
-
 Do POST
     [Documentation]
     ...    Sends a *``POST``* request on a previously created HTTP Session.
