@@ -171,4 +171,6 @@ class DateTimeRange:
         return NotImplemented
 
     def __repr__(self) -> str:
-        return f"DateTimeRange(start={self.start_date!r}, end={self.end_date!r})"
+        return (
+            f"DateTimeRange(start_date={self.start_date!r}, end_date={self.end_date!r})"
+        )

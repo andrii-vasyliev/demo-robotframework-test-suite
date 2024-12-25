@@ -14,6 +14,11 @@ from ApplicationLibrary.exec_context import (
 from ApplicationLibrary.utils import AuditInfo
 from ApplicationLibrary.entity import Customer
 
+_CREATE_CUSTOMER_FAKER: dict = {
+    "name": fake_customer_name,
+    "email": fake_customer_email,
+}
+
 
 class CustomersKeywords:
     """Customers related keywords"""
@@ -56,11 +61,9 @@ class CustomersKeywords:
     ) -> dict:
         """
         Populates customer body.
-        If *``body``* is not provided, generates random customer name and email.
-        If the *``name``* is specified as FAKE_IT in the body, a random name will be generated.
-        If the *``name``* is not provided in the body, it will be removed.
-        If the *``email``* is specified as FAKE_IT in the body, a random email will be generated.
-        If the *``email``* is not provided in the body, it will be removed.
+        If *``body``* is not provided, generates create customer body with random values.
+        If the element is specified as *``FAKE_IT``* in the body, a random value will be generated.
+        If the element is None or empty in the body, it will be removed.
 
         Parameters:
             - *``locale``*: locale to use for fake data generation
@@ -72,16 +75,10 @@ class CustomersKeywords:
         if not body:
             body = {"name": FAKE_IT, "email": FAKE_IT}
 
-        customer_name: str | None = body.get("name")
-        if customer_name == FAKE_IT:
-            body["name"] = fake_customer_name(locale)
-        elif not customer_name:
-            body.pop("name", None)
-
-        customer_email: str | None = body.get("email")
-        if customer_email == FAKE_IT:
-            body["email"] = fake_customer_email(locale)
-        elif not customer_email:
-            body.pop("email", None)
+        for key, value in body.items():
+            if value == FAKE_IT:
+                body[key] = _CREATE_CUSTOMER_FAKER[key](locale)
+            elif not value:
+                body.pop(key, None)
 
         return body
