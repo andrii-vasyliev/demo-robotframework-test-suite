@@ -61,7 +61,7 @@ Create Customer With Duplicate Keys Valid Request
     Validate Create Customer Success Response    ${response}
     ${json_object}    Convert String To Json    ${json_string}
     ${c}    Define Customer
-    ...    ${response.json()}[id]
+    ...    ${response.json()["id"]}
     ...    ${json_object}
     ...    scope=${SCOPE}
     Dictionaries Should Be Equal    ${c.json}    ${response.json()}    API response is not as expected
