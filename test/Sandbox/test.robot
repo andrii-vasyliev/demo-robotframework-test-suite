@@ -65,8 +65,21 @@ No scope
     Log Many    ${SUITES_CONTEXT}    ${SUITE_CONTEXT}    ${TEST_CONTEXT}
     [Teardown]    No Operation
 
-Pimg
+Ping
     Check Service Availability    ${API}
+
+Create Customer
+    Setup API Session
+    ${c0}    API Create Customer
+    ${c1}    API Create Customer    name=${{ FakeItLibrary.fake_customer_name() }}
+    ${c2}    API Create Customer
+    ...    name=${{ FakeItLibrary.fake_customer_name() }}
+    ...    email=${{ FakeItLibrary.fake_customer_email() }}
+    ${c3}    API Create Customer    name=${FAKE_IT}
+    ${c5}    API Create Customer    name=${FAKE_IT}    email=${EMPTY}
+    ${c6}    API Create Customer    name=${FAKE_IT}    email=${None}
+    ${c7}    API Create Customer    name=${FAKE_IT}    email=${FAKE_IT}
+    Validate Test Data
 
 
 *** Keywords ***

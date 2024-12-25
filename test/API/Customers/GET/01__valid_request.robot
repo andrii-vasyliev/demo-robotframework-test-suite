@@ -161,9 +161,9 @@ Repeated get customer by some unknown query parameter in addition to known
 Suite Setup
     [Documentation]    Performs basic test setup and creates few customers to use in the test cases.
     Basic Suite Setup
-    API Create Customer    email=${None}
+    API Create Customer    name=${FAKE_IT}
     API Create Customer
-    API Create Customer    ${${SUITE}_CONTEXT.customers[1].name}
-    API Create Customer    ${${SUITE}_CONTEXT.customers[1].name}    ${None}
-    API Create Customer    email=${${SUITE}_CONTEXT.customers[1].email}
+    API Create Customer    name=${${SUITE}_CONTEXT.customers[1].name}    email=${FAKE_IT}
+    API Create Customer    name=${${SUITE}_CONTEXT.customers[1].name}
+    API Create Customer    name=${FAKE_IT}    email=${${SUITE}_CONTEXT.customers[1].email}
     Validate Test Data

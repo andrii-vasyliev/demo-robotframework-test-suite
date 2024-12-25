@@ -6,7 +6,7 @@ from ApplicationLibrary.utils import Audited
 class Customer(Audited):
     """Customer entity"""
 
-    def __init__(self, customer_id: str, name: str, email: str | None) -> None:
+    def __init__(self, customer_id: str, name: str | None, email: str | None) -> None:
         super().__init__()
         self.id: str = customer_id
         self.name = name
@@ -18,7 +18,7 @@ class Customer(Audited):
         return self._name
 
     @name.setter
-    def name(self, name: str) -> None:
+    def name(self, name: str | None) -> None:
         """Sets customer name"""
         self._name: str | None = (
             customer_name if name and (customer_name := name.strip()) else None

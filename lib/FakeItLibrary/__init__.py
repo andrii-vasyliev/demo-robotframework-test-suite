@@ -4,6 +4,8 @@ Library provides an interface for generating test data.
 
 from .fake_it import (
     Locales,
+    DEFAULT_LOCALE,
+    FAKE_IT,
     fake_customer_name,
     fake_customer_email,
     fake_domain_name,
@@ -12,6 +14,8 @@ from .fake_it import (
 
 __all__ = [
     "Locales",
+    "DEFAULT_LOCALE",
+    "FAKE_IT",
     "fake_customer_name",
     "fake_customer_email",
     "fake_domain_name",

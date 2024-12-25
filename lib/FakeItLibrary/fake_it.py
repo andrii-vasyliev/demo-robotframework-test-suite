@@ -11,6 +11,7 @@ class Locales(StrEnum):
 
 
 DEFAULT_LOCALE = Locales.PL
+FAKE_IT: str = "FakeIt"
 
 __fake = Faker([locale.value for locale in Locales], use_weighting=False)
 

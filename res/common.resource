@@ -18,6 +18,8 @@ Resource            project_settings.resource
 
 
 *** Variables ***
+${LOCALE}               ${{ FakeItLibrary.DEFAULT_LOCALE}}
+${FAKE_IT}              ${{ FakeItLibrary.FAKE_IT}}
 ${SCOPE}                ${None}
 ${GLOBAL}               ${{ ApplicationLibrary.GLOBAL_SCOPE }}
 ${SUITES}               ${{ ApplicationLibrary.ExecContextScope.SUITES }}

@@ -27,18 +27,16 @@ Create Customer Valid Request
     ...    - response body content against expected entity
     ...
     ...    Parameters:
-    ...    - *``&args``*    named arguments that represent key/value pairs of the Create Customer body
+    ...    - *``&body``*    named arguments that represent key/value pairs of the Create Customer request body
     ...
-    [Arguments]    &{args}
-    ${body}    Create Dictionary    &{args}
+    [Arguments]    &{body}
     Event Audit Start
     ${response}    Do POST    API    customers/    ${body}
     Event Audit End
     Validate Create Customer Success Response    ${response}
     ${c}    Define Customer
-    ...    ${response.json()}[id]
-    ...    ${args.get('name', None)}
-    ...    ${args.get('email', None)}
+    ...    ${response.json()["id"]}
+    ...    ${body}
     ...    scope=${SCOPE}
     Dictionaries Should Be Equal    ${c.json}    ${response.json()}    API response is not as expected
     Validate Customers    ${c}
@@ -64,8 +62,7 @@ Create Customer With Duplicate Keys Valid Request
     ${json_object}    Convert String To Json    ${json_string}
     ${c}    Define Customer
     ...    ${response.json()}[id]
-    ...    ${json_object.get('name', None)}
-    ...    ${json_object.get('email', None)}
+    ...    ${json_object}
     ...    scope=${SCOPE}
     Dictionaries Should Be Equal    ${c.json}    ${response.json()}    API response is not as expected
     Validate Customers    ${c}
@@ -125,8 +122,7 @@ Create Customer Invalid Request
     ...    - *``msg``*    expected error message
     ...    - *``&args``*    named arguments that represent key/value pairs of the Create Customer body
     ...
-    [Arguments]    ${expected_status}    ${msg}    &{args}
-    ${body}    Create Dictionary    &{args}
+    [Arguments]    ${expected_status}    ${msg}    &{body}
     ${response}    Do POST    API    customers/    ${body}    expected_status=any
     Validate API Error Response    ${response}    ${expected_status}
     Should Contain    ${response.json()}[detail][0][msg]    ${msg}    Incorrect Create Customer error message

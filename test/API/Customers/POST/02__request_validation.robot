@@ -127,5 +127,5 @@ Create customer with duplicate keys validation
 Setup Uniqueness Validation Case
     [Documentation]    Performs basic test setup and creates few customers to use in the test case.
     Basic Test Setup
-    API Create Customer    email=${None}
+    API Create Customer    name=${FAKE_IT}
     API Create Customer
