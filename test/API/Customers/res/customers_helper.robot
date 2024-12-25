@@ -120,7 +120,7 @@ Create Customer Invalid Request
     ...    Parameters:
     ...    - *``expected_status``*    expected response HTTP status code
     ...    - *``msg``*    expected error message
-    ...    - *``&args``*    named arguments that represent key/value pairs of the Create Customer body
+    ...    - *``&body``*    named arguments that represent key/value pairs of the Create Customer body
     ...
     [Arguments]    ${expected_status}    ${msg}    &{body}
     ${response}    Do POST    API    customers/    ${body}    expected_status=any
