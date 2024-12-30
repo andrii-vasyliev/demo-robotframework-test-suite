@@ -1,5 +1,6 @@
-FROM python:3.11
+FROM python:3.13
 COPY ./requirements.txt ./
+RUN pythom -m pip install --no-cache-dir --upgrade pip
 RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
 ENV ENV_NAME=local
 ENV SUITE=Demo_Test_Suite.API.Customers
